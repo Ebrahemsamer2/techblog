@@ -1,100 +1,76 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+
+use App\Http\Controllers\Controller;
 use App\Category;
-class AdminCategoriesController extends Controller
+
+class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $categories = Category::all();
-
+        $categories = Category::paginate(20);
         return view('admin.categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $inputs = $request->validate([
-            'name' => 'required|min:4|max:20'
-        ]);
-        Category::create($inputs);
+        
+        $rules = [
+            'name' => 'required',
+            'user_id' => 'required|integer',
+        ];
+
+        $this->validate($request, $rules);
+
+        $data = $request->all();
+        $data['slug'] = strtolower($request->name);
+        Category::create($data);
         Session::flash('created_category', 'Category has been created');
         return redirect('/admin/categories');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view('admin.categories.show', compact('category'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = Category::findOrFail($id);
         return view('admin.categories.edit', compact('category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        $inputs = $request->validate([
-            'name' => 'required|min:4|max:20'
-        ]);
-        $category = Category::findOrFail($id);
-        $category->update($inputs);
-        Session::flash('updated_category', 'Category has been updated');
-        return redirect('/admin/categories');
+        $rules = [
+            'name' => 'required',
+            'user_id' => 'required|integer',
+        ];
+
+        $this->validate($request, $rules);
+
+        $category->slug = strtolower($request->name);
+
+        if($category->isClean()) {
+            Session::flash('nothing-changed', 'Nothing Changed');
+        }else {
+            $category->save();
+            Session::flash('updated_category', 'Category has been updated');
+            return redirect('/admin/categories');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        Category::destroy($id);
+        $category->delete();
         Session::flash('deleted_category', 'Category has been deleted');
         return redirect('/admin/categories');
     }

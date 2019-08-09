@@ -37,16 +37,22 @@
 				@foreach($users as $user)
 					<tr>
 						<th scope="row">{{ $user->id }}</th>
-						<td >
-							<img class="img-fluid img-circle" alt="User Image" height="50" src="{{ $user->photo ? $user->photo->path : 'No Image' }}"/>
+						<td>
+							@if( file_exists(public_path('/images/') . $user->photo->filename))
+								<img class="img-fluid img-circle" alt="User Image" width="150" src="{{ asset('/images/' . $user->photo->filename)}}"/>
+							@else
+								<img class="img-fluid img-circle" alt="User Image" height="50" src="{{ asset('/images/user.jpg') }}"/>
+							@endif
+							
+						
 						</td>
 						<td>{{ $user->name }}</td>
 						<td>{{ $user->email }}</td>
-						<td>{{ $user->role->name }}</td>
+						<td>{{ $user->admin == 1 ? 'Admin':'User' }}</td>
 						<td>{{ $user->created_at->diffForHumans() }}</td>
 						<td>{{ $user->updated_at->diffForHumans() }}</td>
 						<td class="links">
-							{!! Form::open(['method'=>'DELETE', 'action'=>['AdminUsersController@destroy', $user->id] ]) !!}
+							{!! Form::open(['method'=>'DELETE', 'action'=>['Admin\UserController@destroy', $user->id] ]) !!}
 								{!! Form::submit('x', ['class'=>'btn btn-danger'])!!}
 							{!! Form::close() !!}
 							<a class="btn btn-info" href="/admin/users/{{ $user->id }}/edit"><i class="fa fa-pencil"></i></a>

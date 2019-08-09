@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\Controller;
+
 use App\Comment;
 use App\Reply;
 
-class AdminCommentRepliesController extends Controller
+class ReplyController extends Controller
 {
 
     public function store(Request $request)

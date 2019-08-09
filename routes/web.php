@@ -11,12 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect('/home');
-});
-
-
-
 // Route::get('/contact', function() {
 // 	$data = [
 // 		'title' => 'User Contact',
@@ -32,24 +26,21 @@ Route::get('post/{id}', 'PostController@show');
 
 
 
-Route::group(['middleware'=>'admin'], function() {
+Route::namespace('Admin')->group( function() {
 
-	Route::resource('/admin/users', 'AdminUsersController');
+	Route::resource('/admin/users', 'UserController', ['except' => ['create', 'store']]);
 	
-	Route::resource('/admin/posts', 'AdminPostsController');
+	Route::resource('/admin/posts', 'PostController');
 
-	Route::resource('/admin/categories', 'AdminCategoriesController');
+	Route::resource('/admin/categories', 'CategoryController');
 
-	Route::resource('/admin/media', 'AdminMediaController');
+	Route::resource('/admin/photos', 'PhotoController', ['except' => ['create', 'store'] ]);
 
-	Route::resource('/admin/comments', 'AdminCommentsController');
+	Route::resource('/admin/comments', 'CommentController');
+
+	Route::resource('admin.comments.replies', 'ReplyController');
 
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::get('categories/{slug}', 'HomeController@category_posts');
+// Route::get('categories/{slug}', 'HomeController@category_posts');
 
