@@ -14,10 +14,16 @@ class CreateTableCategories extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned()->index();
             $table->string('name');
+            $table->bigInteger('user_id')->unsigned();
+            $table->string('slug')->nullable();
+            
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

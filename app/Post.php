@@ -9,7 +9,14 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'content', 'user_id', 'photo_id','category_id'];
+    protected $fillable = [
+        'title',
+        'content',
+        'slug',
+        'user_id',
+        'photo_id',
+        'category_id',
+    ];
 
     use Sluggable;
     public function sluggable()

@@ -17,12 +17,13 @@ class CreateRepliesTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->bigIncrements('id');
-            $table->integer('user_id');
+            $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('comment_id')->unsigned();
             $table->text('the_reply');
             $table->timestamps();
 
-            $table->foreign('comment_id')->references('id')->on('comments')->on_delete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
         });
     }
 

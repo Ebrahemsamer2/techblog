@@ -15,12 +15,14 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->engine = 'InnoDB';
+
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->string('title');
             $table->text('content');
-            $table->integer('category_id')->unsigned();
-            $table->integer('photo_id')->unsigned();
+            $table->string('slug')->nullable();
+            $table->bigInteger('category_id')->unsigned();
+            $table->bigInteger('photo_id')->unsigned();
             $table->timestamps();
 
 
