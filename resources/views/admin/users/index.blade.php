@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 
-@section('title', 'Admin | Users')
+@section('title', 'Users | Admin Dashboard')
 
 
 @section('content')
@@ -39,9 +39,9 @@
 						<th scope="row">{{ $user->id }}</th>
 						<td>
 							@if( file_exists(public_path('/images/') . $user->photo->filename))
-								<img class="img-fluid img-circle" alt="User Image" width="150" src="{{ asset('/images/' . $user->photo->filename)}}"/>
+								<img class="img-fluid rounded" alt="User Image" width="150" height="100" src="{{ asset('/images/' . $user->photo->filename)}}"/>
 							@else
-								<img class="img-fluid img-circle" alt="User Image" height="50" src="{{ asset('/images/user.jpg') }}"/>
+								<img class="img-fluid rounded" alt="User Image" width="150" height="100" src="{{ asset('/images/user.jpg') }}"/>
 							@endif
 							
 						
@@ -62,7 +62,9 @@
 			@endif
 		  </tbody>
 		</table>
-		<a href="/admin/users/create" class="btn btn-info">New User</a>
+
+		{{ $users->links() }}
+
 	</div>
 
 @endsection

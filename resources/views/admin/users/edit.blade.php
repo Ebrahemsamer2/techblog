@@ -9,33 +9,18 @@
 	@include('includes.form_error')
 	<h2>Edit User</h2>
 	<div class="user-image">
-		
-		<img height="100" width="100" alt="User Image" src="{{ $user->photo ? $user->photo->path : 'No Image' }}" class="img-responsive">
+		@if(file_exists(public_path('/images/') . $user->photo->filename))
+			<img height="200" width="200" alt="User Image" src="{{ asset('/images/' .  $user->photo->filename)}}" class="img-fluid img-thumbnail text-center">
+		@else
+			<img class="img-fluid img-thumbnail text-center" height="200" width="200" alt="User Image" src="{{ asset('/images/user.jpg')}}">
+		@endif
 
 	</div>
-	{!! Form::model($user,['method'=>'PATCH', 'action'=>['AdminUsersController@update', $user->id],'files'=>true]) !!}
-		<div class="form-group">
-			{!! Form::label('name', 'Name'); !!}
-			{!! Form::text('name',null, ['class'=>'form-control', 'required'=>'required']) !!}
-		</div>
+	{!! Form::model($user,['method'=>'PATCH', 'action'=>['Admin\UserController@update', $user->id],'files'=>true]) !!}
 
 		<div class="form-group">
-			{!! Form::label('email', 'Email'); !!}
-			{!! Form::email('email',null, ['class'=>'form-control', 'required'=>'required']) !!}
-		</div>
-
-		<div class="form-group">
-			{!! Form::label('password', 'Password'); !!}
-			{!! Form::password('password',['class'=>'form-control']) !!}
-		</div>
-		<div class="form-group">
-			{!! Form::label('path', 'User Image'); !!}
-			{!! Form::file('path',['class'=>'form-control']) !!}
-		</div>
-
-		<div class="form-group">
-			{!! Form::label('role_id', 'Role'); !!}
-			{!! Form::select('role_id', $roles , null, ['class'=>'form-control', 'required'=>'required']) !!}
+			{!! Form::label('admin', 'Role'); !!}
+			{!! Form::select('admin', ['1' => 'Admin', '0' => 'User'] , null, ['class'=>'form-control', 'required'=>'required']) !!}
 		</div>
 
 		<div class="form-group">

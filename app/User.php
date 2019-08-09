@@ -8,9 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Illuminate\Support\Str;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class User extends Authenticatable
 {
     use Notifiable;
+
+    use SoftDeletes;
 
     const ADMIN = '1';
     const USER = '0';

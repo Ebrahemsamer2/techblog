@@ -50,7 +50,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        unlink(public_path() . $user->photo->path);
+        if(file_exists(public_path() . $user->photo->filename)) {
+            unlink(public_path() . $user->photo->path);
+        }
         Session::flash('deleted_user', 'User has been deleted.');
         return redirect('/admin/users');
     }
