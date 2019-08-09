@@ -9,34 +9,33 @@ class AdminMediaController extends Controller
 {
 
     public function index() {
-    	$photos = Photo::all();
-    	return view('admin.media.index', compact('photos'));
+    	$photos = Photo::paginate(10);
+    	return view('admin.photo.index', compact('photos'));
     }
 
-    public function create() {
-    	return view('admin.media.create');
-    }
+ //    public function create() {
+ //    	return view('admin.photo.create');
+ //    }
 
-    public function store(Request $request) {
-    	$inputs = $request->all();
-    	if($file = $request->file('path')) {
-    		$name = time() . $file->getClientOriginalName();
+ //    public function store(Request $request) {
+ //    	$inputs = $request->all();
+ //    	if($file = $request->file('path')) {
+ //    		$name = time() . $file->getClientOriginalName();
 
-    		$file->move('images', $name);
+ //    		$file->move('images', $name);
 
-			Photo::create([ 'path' => $name]);
+	// 		Photo::create([ 'path' => $name]);
 
-			return redirect('/admin/media');
-    	}
-	}
+	// 		return redirect('/admin/photos');
+ //    	}
+	// }
 
-	public function destroy($id) {
+	public function destroy(Photo $photo) {
 
-		$photo = Photo::findOrFail($id);
-		if(file_exists(public_path() . $photo['path'])){
-			unlink(public_path() . $photo['path']);
+		if(file_exists(public_path() . $photo->filename)){
+			unlink(public_path() . $photo->filename);
 		}
 		$photo->delete();
-		return redirect('/admin/media');
+		return redirect('/admin/photos');
 	}
 }
