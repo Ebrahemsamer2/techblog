@@ -13,7 +13,7 @@ Route::namespace('Admin')->group( function() {
 
 	Route::resource('/admin/categories', 'CategoryController');
 
-	Route::resource('/admin/photos', 'PhotoController', ['except' => ['create', 'store'] ]);
+	Route::resource('/admin/photos', 'PhotoController', ['only' => ['index', 'destroy'] ]);
 
 	Route::resource('/admin/comments', 'CommentController');
 

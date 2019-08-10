@@ -79,9 +79,6 @@
 		                    <li>
 		                        <a href="/admin/users">All Users</a>
 		                    </li>
-		                    <li>
-		                        <a href="/admin/users/create">New User</a>
-		                    </li>
 		                </ul>
 		            </li>
 		            <li>
@@ -106,17 +103,6 @@
 		                    </li>
 		                </ul>
 		            </li>
-		            <li>
-		                <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Media</a>
-		                <ul class="collapse list-unstyled" id="mediaSubmenu">
-		                    <li>
-		                        <a href="/admin/media">All Media</a>
-		                    </li>
-		                    <li>
-		                        <a href="/admin/media/create">New Media</a>
-		                    </li>
-		                </ul>
-		            </li>
 
 		            <li>
 		                <a href="#commentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Comments</a>
@@ -129,9 +115,19 @@
 		                    </li>
 		                </ul>
 		            </li>
+
 		            <li>
-		                <a href="#">Portfolio</a>
+		                <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Photos</a>
+		                <ul class="collapse list-unstyled" id="mediaSubmenu">
+		                    <li>
+		                        <a href="/admin/photos">All Photos</a>
+		                    </li>
+		                    <li>
+		                        <a href="/admin/photos/create">New Photo</a>
+		                    </li>
+		                </ul>
 		            </li>
+
 		            <li>
 		                <a href="#">Contact</a>
 		            </li>

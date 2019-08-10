@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
-
-@section('title', 'Admin | Categories')
-
+@section('title', 'Categories | Admin Dashboard')
 
 @section('content')
 
@@ -11,14 +9,12 @@
 		<div class="row">
 			<div class="col-sm-4">
 				<h2>Create Category</h2>
-				{!! Form::open(['method'=>'POST','action'=>'AdminCategoriesController@store']) !!}
+				{!! Form::open(['method'=>'POST','action'=>'Admin\CategoryController@store']) !!}
 					<div class="form-group">
 						{!! Form::text('name', null, ['class'=>'form-control','placeholder'=>'Category Name']) !!}	
 					</div>
-					<div class="form-group">
-						{!! Form::submit('Create Category',['class'=>'btn btn-primary']) !!}	
-					</div>
-
+					{!! Form::submit('Create Category',['class'=>'btn btn-primary']) !!}	
+					
 				{!! Form::close() !!}
 				@include('includes.form_error')
 			</div>
@@ -52,7 +48,7 @@
 							<td>{{ $category->created_at->diffForHumans() }}</td>
 							<td>{{ $category->updated_at->diffForHumans() }}</td>
 							<td class="links">
-								{!! Form::open(['method'=>'DELETE', 'action'=>['AdminCategoriesController@destroy', $category->id] ]) !!}
+								{!! Form::open(['method'=>'DELETE', 'action'=>['Admin\CategoryController@destroy', $category->id] ]) !!}
 									{!! Form::submit('x', ['class'=>'btn btn-danger'])!!}
 								{!! Form::close() !!}
 								<a class="btn btn-info" href="/admin/categories/{{ $category->id }}/edit"><i class="fa fa-pencil"></i></a>
@@ -62,6 +58,7 @@
 				@endif
 			  </tbody>
 			</table>
+			{{ $categories->links() }}
 			</div>
 		</div>
 	</div>

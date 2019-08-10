@@ -11,26 +11,9 @@ class PhotoController extends Controller
 {
 
     public function index() {
-    	$photos = Photo::paginate(10);
-    	return view('admin.photo.index', compact('photos'));
+    	$photos = Photo::orderBy('id', 'desc')->paginate(30);
+    	return view('admin.photos.index', compact('photos'));
     }
-
- //    public function create() {
- //    	return view('admin.photo.create');
- //    }
-
- //    public function store(Request $request) {
- //    	$inputs = $request->all();
- //    	if($file = $request->file('path')) {
- //    		$name = time() . $file->getClientOriginalName();
-
- //    		$file->move('images', $name);
-
-	// 		Photo::create([ 'path' => $name]);
-
-	// 		return redirect('/admin/photos');
- //    	}
-	// }
 
 	public function destroy(Photo $photo) {
 

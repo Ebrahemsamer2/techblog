@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
-
-@section('title', 'Admin | Edit Category')
-
+@section('title', 'Edit Category | Admin Dashboard')
 
 @section('content')
 
@@ -10,7 +8,7 @@
 		<h2>Edit Category</h2>
 		<div class="row">
 			<div class="col-sm-4">
-				{!! Form::model($category, ['method'=>'PATCH','action'=>['AdminCategoriesController@update', $category->id]]) !!}
+				{!! Form::model($category, ['method'=>'PATCH','action'=>['Admin\CategoryController@update', $category->id]]) !!}
 					<div class="form-group">
 						{!! Form::text('name', null, ['class'=>'form-control']) !!}
 					</div>

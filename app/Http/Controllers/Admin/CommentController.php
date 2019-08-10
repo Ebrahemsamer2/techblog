@@ -15,34 +15,19 @@ use App\Post;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $comments = Comment::all();
+        $comments = Comment::orderBy('id', 'desc')->paginate(20);
         return view('admin.comments.index', compact('comments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $posts = Post::pluck('title', 'id')->all();
         return view('admin.comments.create', compact('posts'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $user_id = Auth::user()->id;
@@ -99,15 +84,9 @@ class CommentController extends Controller
         return redirect('/admin/comments');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
-        Comment::destroy($id);
+        $comment->delete();
         return redirect('/admin/comments');
     }
 

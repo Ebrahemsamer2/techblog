@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::paginate(20);
+        $categories = Category::orderBy('id', 'desc')->paginate(20);
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -26,12 +26,13 @@ class CategoryController extends Controller
         
         $rules = [
             'name' => 'required',
-            'user_id' => 'required|integer',
         ];
 
         $this->validate($request, $rules);
 
         $data = $request->all();
+
+        $data['user_id'] = 1; // temp till auth
 
         Category::create($data);
         Session::flash('created_category', 'Category has been created');
@@ -52,12 +53,15 @@ class CategoryController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'user_id' => 'required|integer',
         ];
 
         $this->validate($request, $rules);
 
         $category->slug = strtolower($request->name);
+
+        if($request->has('name')){
+            $category->name = $request->name;
+        }
 
         if($category->isClean()) {
             Session::flash('nothing-changed', 'Nothing Changed');
