@@ -39,8 +39,8 @@
 					<tr>
 						<th scope="row">{{ $post->id }}</th>
 						<td>
-							@if($post->photo)
-								<img height="50" width="100" src="{{ $post->photo->path }}" alt="Post Thumbnail">
+							@if(file_exists(public_path('/images/') . $post->photo->filename))
+								<img class="img-fluid" height="50" width="100" src="{{ asset('/images/' . $post->photo->filename) }}" alt="Post Thumbnail">
 							@else
 								No Image
 							@endif
@@ -52,7 +52,7 @@
 						<td>{{ $post->created_at->diffForHumans() }}</td>
 						<td>{{ $post->updated_at->diffForHumans() }}</td>
 						<td class="links">
-							{!! Form::open(['method'=>'DELETE', 'action'=>['AdminPostsController@destroy', $post->id] ]) !!}
+							{!! Form::open(['method'=>'DELETE', 'action'=>['Admin\PostController@destroy', $post->id] ]) !!}
 								{!! Form::submit('x', ['class'=>'btn btn-danger'])!!}
 							{!! Form::close() !!}
 							<a class="btn btn-info" href="/admin/posts/{{ $post->id }}/edit"><i class="fa fa-pencil"></i></a>
@@ -62,13 +62,12 @@
 			@endif
 		  </tbody>
 		</table>
-		<a href="/admin/posts/create" class="btn btn-info">New Post</a>
-	    <div class="row">
-	        <div class="col-md-4"></div>
+		<div class="row">
 	        <div class="col-md-4">
-	            {{ $posts->render() }}
+	        	<a href="/admin/posts/create" class="btn btn-info">New Post</a>
 	        </div>
 	        <div class="col-md-4"></div>
+	        <div class="col-md-4">{{ $posts->links() }}</div>
 	    </div>
 	</div>
 

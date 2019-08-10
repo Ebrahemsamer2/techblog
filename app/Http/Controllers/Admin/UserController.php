@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(20);
+        $users = User::orderBy('id', 'desc')->paginate(20);
         return view('admin.users.index', compact('users'));
     }
 
@@ -51,7 +51,7 @@ class UserController extends Controller
     {
         $user->delete();
         if(file_exists(public_path() . $user->photo->filename)) {
-            unlink(public_path() . $user->photo->path);
+            unlink(public_path() . $user->photo->filename);
         }
         Session::flash('deleted_user', 'User has been deleted.');
         return redirect('/admin/users');

@@ -12,7 +12,6 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
-        'slug',
         'user_id',
         'photo_id',
         'category_id',
@@ -28,7 +27,7 @@ class Post extends Model
         ];
     }
 
-    protected $directory = "/admin/images/";
+    // protected $directory = "/admin/images/";
 
 
     public function photo() {

@@ -20,9 +20,10 @@ class CreateTableCategories extends Migration
             $table->string('name');
             $table->bigInteger('user_id')->unsigned();
             $table->string('slug')->nullable();
-            
             $table->timestamps();
 
+            $table->softDeletes();
+            
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

@@ -7,13 +7,18 @@
 @section('content')
 	<div class="container-fluid">
 		@include('includes.form_error')
+		
+		@if(Session::has('nothing_changed'))
+			<p class="alert alert-info">{{ Session::get('nothing_changed') }}</p>
+		@endif
+
 		<h2>Edit Post</h2>
-		@if($post->photo)
+		@if(file_exists(public_path('/images/') . $post->photo->filename))
 			<div class="post-image">
-				<img class="img-responsive" height="100" alt="Post Thumbnail" src="{{ $post->photo->path }}">
+				<img class="rounded" height="100" alt="Post Thumbnail" src="{{ asset('/images/' . $post->photo->filename)}}">
 			</div>
 		@endif
-		{!! Form::model($post, ['method'=>'PATCH','action'=>['AdminPostsController@update', $post->id], 'files'=>true]) !!}
+		{!! Form::model($post, ['method'=>'PATCH','action'=>['Admin\PostController@update', $post->id], 'files'=>true]) !!}
 
 			<div class="form-group">
 				{!! Form::label('title', 'Title') !!}

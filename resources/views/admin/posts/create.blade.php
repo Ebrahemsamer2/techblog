@@ -1,18 +1,17 @@
 @extends('layouts.master')
 
 
-@section('title', 'Admin | Create Post')
+@section('title', 'Create Post | Admin Dashboard')
 
 
 @section('content')
 	<div class="container-fluid">
 		@include('includes.form_error')
 		<h2>Create Post</h2>
-		{!! Form::open(['method'=>'post','action'=>'AdminPostsController@store', 'files'=>true]) !!}
-
+		{!! Form::open(['method'=>'POST','action'=>'Admin\PostController@store', 'files'=>true]) !!}
 			<div class="form-group">
 				{!! Form::label('title', 'Title') !!}
-				{!! Form::text('title', null, ['class'=>'form-control']) !!}	
+				{!! Form::text('title', null,['class'=>'form-control']) !!}	
 			</div>
 			<div class="form-group">
 				{!! Form::label('content', 'Content') !!}
@@ -20,7 +19,7 @@
 			</div>
 			<div class="form-group">
 				{!! Form::label('category_id', 'Category') !!}
-				{!! Form::select('category_id',[''=>'Select Category'] + $categories,null, ['class'=>'form-control']) !!}
+				{!! Form::select('category_id',$categories, null, ['class'=>'form-control']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('photo_id', 'Post Thumbnail') !!}

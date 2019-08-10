@@ -32,7 +32,7 @@ class CategoryController extends Controller
         $this->validate($request, $rules);
 
         $data = $request->all();
-        $data['slug'] = strtolower($request->name);
+
         Category::create($data);
         Session::flash('created_category', 'Category has been created');
         return redirect('/admin/categories');

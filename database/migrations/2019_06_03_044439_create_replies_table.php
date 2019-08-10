@@ -22,6 +22,8 @@ class CreateRepliesTable extends Migration
             $table->text('the_reply');
             $table->timestamps();
 
+            $table->softDeletes();
+            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
         });
