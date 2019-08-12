@@ -1,70 +1,71 @@
 @extends('layouts.master')
 
-
-@section('title', 'Admin | Posts')
-
+@section('title', 'Comments | Admin Dashboard')
 
 @section('content')
 
 	<div class="container-fluid users-table comments">
 
-		@if(Session::has('deleted_post'))
-			<p class="alert alert-success">{{ Session::get('deleted_post') }}</p>
+		@if(Session::has('deleted_comment'))
+			<p class="alert alert-success">{{ Session::get('deleted_comment') }}</p>
 		@endif
-		@if(Session::has('updated_post'))
-			<p class="alert alert-success">{{ Session::get('updated_post') }}</p>
+		@if(Session::has('updated_comment'))
+			<p class="alert alert-success">{{ Session::get('updated_comment') }}</p>
 		@endif
-		@if(Session::has('created_post'))
-			<p class="alert alert-success">{{ Session::get('created_post') }}</p>
+		@if(Session::has('created_comment'))
+			<p class="alert alert-success">{{ Session::get('created_comment') }}</p>
 		@endif
-		<h2>All Comments <span>Hover on the Comment if you wanna reply</span></h2>
-		<table class="table">
-		  <thead class="thead-dark">
-		    <tr>
-		      <th scope="col">#ID</th>
-		      <th scope="col">Commenter</th>
-		      <th scope="col">The Comment</th>
-		      <th scope="col">Related Post</th>
-		      <th scope="col">Created</th>
-		      <th scope="col">Updated</th>
-		      <th scope="col">Actions</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  	@if($comments)
-				@foreach($comments as $comment)
-					<tr>
-						<th scope="row">{{ $comment->id }}</th>
-						<td>{{ $comment->user->name }}</td>
-						<td>{{ $comment->the_comment }} 
-							<span class="reply-link">Reply</span>
-							<div class="reply-form">
-								{!! Form::open(['method'=>'POST', 'action'=>'AdminCommentsController@store']) !!}
+		<h2>All Comments </h2>
 
-									{{ Form::hidden('comment_id', $comment->id) }}
+		<div class="comments">
+			
+			@foreach($posts as $post)
+				<h5>Post <span>{{ $post->id }}</span> : {{ $post->title }}</h2>
+				@if(count($post->comments) > 0)
+				@foreach($post->comments as $comment)
+				<div class="post-comments">
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-3">
+							@if(file_exists(public_path('/images/') . $comment->user->photo->filename))
+								<img src="{{ asset('/images/' . $comment->user->photo->filename) }}" width="50" height="50" class="rounded-circle">
+							@else
+								<img src="{{ asset('/images/user.jpg') }}" width="50" height="50" class="rounded-circle">
+							@endif
+							<span>{{ $comment->user->name }}</span>
+						</div>
+						<div class="col-sm-6">
+							<p>{{ $comment->the_comment }}</p>
+							<div class="comment-actions links">
+								<a class="btn btn-info btn-sm" href="/admin/comments/{{$comment->id}}/edit">Edit</a>
 
-									{!! Form::textarea('the_reply', null, ['class'=>'form-control']) !!}
-									{!! Form::submit('Reply', ['class'=>'btn btn-info']) !!}
+								<a class="btn btn-secondary btn-sm" href="/admin/comments/{{$comment->id}}/reply">Reply</a>
+
+								{!! Form::open(['method' => 'DELETE', 'action' => ['Admin\CommentController@destroy',$comment->id] ]) !!}
+									{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
 								{!! Form::close() !!}
+
+								<a class="btn btn-secondary btn-sm" href="/admin/comments/{{$comment->id}}">Show Replies</a>
 							</div>
-						</td>
-						<td>{{ $comment->post->title }}</td>
-						<td>{{ $comment->created_at ? $comment->created_at->diffForHumans() : 'No Date' }}</td>
-						<td>{{ $comment->updated_at ? $comment->updated_at->diffForHumans() : 'No Date' }}</td>
-						<td class="links">
-							{!! Form::open(['method'=>'DELETE', 'action'=>['AdminCommentsController@destroy', $comment->id] ]) !!}
-								{!! Form::submit('x', ['class'=>'btn btn-danger'])!!}
-							{!! Form::close() !!}
-							<a class="btn btn-info" href="/admin/comments/{{ $comment->id }}/edit"><i class="fa fa-pencil"></i></a>
-							<button class="btn btn-primary"><i class="fa fa-reply"></i></button>
-						</td>
-					</tr>
-					
+						</div>
+					</div>
+				</div>
 				@endforeach
-			@endif
-		  </tbody>
-		</table>
-		<a href="/admin/comments/create" class="btn btn-info">New Comment</a>
+				@else
+					<p>No Comments in this post</p>
+				@endif
+			@endforeach
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<a href="/admin/comments/create" class="btn btn-info">New Comment</a>
+			</div>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				{{ $posts->links() }}
+			</div>
+		</div>
+		
 	</div>
 
 @endsection

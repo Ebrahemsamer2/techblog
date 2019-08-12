@@ -117,6 +117,16 @@
 		            </li>
 
 		            <li>
+		                <a href="#repliesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Replies</a>
+		                <ul class="collapse list-unstyled" id="repliesSubmenu">
+		                    <li>
+		                        <a href="/admin/comments/replies">All Replies</a>
+		                    </li>
+		                </ul>
+		            </li>
+
+
+		            <li>
 		                <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Photos</a>
 		                <ul class="collapse list-unstyled" id="mediaSubmenu">
 		                    <li>

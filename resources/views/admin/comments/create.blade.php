@@ -9,7 +9,7 @@
 		
 		<h2>Comments</h2>
 
-		{!! Form::open(['method'=>'POST', 'action'=>'AdminCommentsController@store']) !!}
+		{!! Form::open(['method'=>'POST', 'action'=>'Admin\CommentController@store']) !!}
 			<div class="form-group">
 				{!! Form::label('post_id', 'Related Post') !!}
 				{!! Form::select('post_id',$posts, null , ['class' => 'form-control']) !!}

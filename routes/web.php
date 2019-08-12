@@ -15,10 +15,26 @@ Route::namespace('Admin')->group( function() {
 
 	Route::resource('/admin/photos', 'PhotoController', ['only' => ['index', 'destroy'] ]);
 
+	// Replies Routes
+
+	Route::get('/admin/comments/replies', 'ReplyController@index');
+
+	Route::get('/admin/comments/{id}/reply', 'ReplyController@create');
+
+	Route::post('/admin/comments/reply', 'ReplyController@store');
+
+	Route::delete('/admin/comments/{id}', 'ReplyController@destroy');
+
+	Route::get('/admin/comments/replies/{id}/edit', 'ReplyController@edit');
+
+	Route::patch('/admin/comments/replies/{id}', 'ReplyController@update');
+
+
 	Route::resource('/admin/comments', 'CommentController');
 
-	Route::resource('admin.comments.replies', 'ReplyController');
-
+	
+	
+	// Route::resource('/admin/comments/{id}/replies', 'ReplyController');
 });
 
 // Route::get('categories/{slug}', 'HomeController@category_posts');

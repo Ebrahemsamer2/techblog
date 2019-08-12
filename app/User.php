@@ -40,10 +40,6 @@ class User extends Authenticatable
         return Str::random(40);
     }
 
-    public function role() {
-        return $this->belongsTo('App\Role');
-    }
-
     public function photo() {
         return $this->belongsTo('App\Photo');
     }
@@ -58,6 +54,9 @@ class User extends Authenticatable
 
     public function comments() {
         return $this->hasMany('App\Comment');
+    }
+    public function replies() {
+        return $this->hasMany('App\Reply');
     }
 
 }

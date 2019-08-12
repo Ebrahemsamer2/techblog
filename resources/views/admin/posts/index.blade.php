@@ -1,11 +1,8 @@
 @extends('layouts.master')
 
-
 @section('title', 'Admin | Posts')
 
-
 @section('content')
-
 
 	<div class="container-fluid users-table">
 
@@ -52,10 +49,13 @@
 						<td>{{ $post->created_at->diffForHumans() }}</td>
 						<td>{{ $post->updated_at->diffForHumans() }}</td>
 						<td class="links">
-							{!! Form::open(['method'=>'DELETE', 'action'=>['Admin\PostController@destroy', $post->id] ]) !!}
+							<a class="btn btn-info" href="/admin/posts/{{ $post->id }}/edit"><i class="fa fa-pencil"></i></a>
+
+							{!! Form::open(['method'=>'DELETE', 'action'=>['Admin\PostController@destroy', $post->id],'class' =>'delete-form' ]) !!}
 								{!! Form::submit('x', ['class'=>'btn btn-danger'])!!}
 							{!! Form::close() !!}
-							<a class="btn btn-info" href="/admin/posts/{{ $post->id }}/edit"><i class="fa fa-pencil"></i></a>
+							
+							<a class="btn btn-secondary" href="/admin/posts/{{ $post->id }}"><i class="fa fa-eye"></i></a>
 						</td>
 					</tr>
 				@endforeach

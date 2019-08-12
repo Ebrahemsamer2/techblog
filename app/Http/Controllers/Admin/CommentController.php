@@ -18,75 +18,77 @@ class CommentController extends Controller
 
     public function index()
     {
-        $comments = Comment::orderBy('id', 'desc')->paginate(20);
-        return view('admin.comments.index', compact('comments'));
+        $posts = Post::orderBy('id', 'desc')->paginate(20);
+        return view('admin.comments.index', compact('posts'));
     }
 
     public function create()
     {
-        $posts = Post::pluck('title', 'id')->all();
+        $posts = Post::pluck('title', 'id');
         return view('admin.comments.create', compact('posts'));
     }
 
     public function store(Request $request)
     {
-        $user_id = Auth::user()->id;
+        // $user_id = Auth::user()->id;
+        $user_id = 1;
 
-        if($request->has('the_comment')) {
-            $inputs = $request->validate([
-                'the_comment' => 'required|min:3',
-                'post_id' => 'required|integer'
-            ]);
-            $inputs['user_id'] = $user_id;
+        $rules = [
+            'the_comment' => 'required',
+            'post_id' => 'required|integer'
+        ];
 
-            Comment::create($inputs);
-            $request->session()->flash('comment_added', 'Your Comment has been Added!');
-        } else {
-            $inputs = $request->all();
-            $inputs['user_id'] = $user_id;
-            Reply::create($inputs);
-            return redirect('/admin/comments');
-        }
+        $this->validate($request, $rules);
 
-        return redirect()->back();
+        $data = $request->all();
+
+        $data['user_id'] = $user_id;
+
+        Comment::create($data);
+        Session::flash('created_comment', 'Your Comment has been Created!');
+        return redirect('/admin/comments');
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
-    public function edit($id)
+    public function edit(Comment $comment)
     {
-        $posts = Post::pluck('title', 'id')->all();
-        $comment = Comment::findOrFail($id);
+        $posts = Post::pluck('title', 'id');
         return view('admin.comments.edit', compact('posts','comment'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comment $comment)
     {
-        $comment = Comment::findOrFail($id);
+        $rules = [
+            'the_comment' => 'required',
+            'post_id' => 'required|integer',
+        ];
 
-        $inputs = $request->validate([
-            'the_comment' => 'required|min:3',
-            'post_id' => 'required|integer'
-        ]);
-        $inputs['user_id'] = Auth::user()->id;
-        $comment->update($inputs);
-        return redirect('/admin/comments');
+        $this->validate($request, $rules);
+
+        if($request->has('the_comment')) {
+            $comment->the_comment = $request->the_comment;
+        }
+        if($request->has('post_id')) {
+            $comment->post_id = $request->post_id;
+        }
+
+        if($comment->isClean()) {
+            // nothing changed
+            Session::flash('nothing_changed', 'Nothing Changed');
+        }else {
+            $comment->save();
+            Session::flash('updated_comment', 'Comment has been updated');
+            return redirect('/admin/comments');
+        }
+    }
+
+    public function show(Comment $comment) {
+        return view('admin.comments.show', compact('comment'));
     }
 
     public function destroy(Comment $comment)
     {
         $comment->delete();
+        Session::flash('deleted_comment', 'Comment has been deleted');
         return redirect('/admin/comments');
     }
 

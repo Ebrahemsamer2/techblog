@@ -9,7 +9,7 @@
 		@include('includes.form_error')
 		<h2>Edit Comment</h2>
 
-		{!! Form::model($comment, ['method'=>'PATCH','action'=>['AdminCommentsController@update', $comment->id]]) !!}
+		{!! Form::model($comment, ['method'=>'PATCH','action'=>['Admin\CommentController@update', $comment->id]]) !!}
 			<div class="form-group">
 				{!! Form::label('post_id', 'Related Post') !!}
 				{!! Form::select('post_id',$posts,null, ['class'=>'form-control']) !!}
