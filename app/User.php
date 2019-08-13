@@ -59,4 +59,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Reply');
     }
 
+    public function isAdmin() {
+        return $this->admin == 1;
+    }
+
 }

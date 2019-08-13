@@ -1,17 +1,32 @@
 <?php
 
 
-// Route::get('post/{id}', 'PostController@show');
+// Front Users Routes
+
+Route::get('/',function() {
+	return view('home');
+});
 
 
+
+
+
+// Admin Routes  
 
 Route::namespace('Admin')->group( function() {
+	// users Routes
 
 	Route::resource('/admin/users', 'UserController', ['except' => ['create', 'store']]);
 	
+	// Posts Routes
+
 	Route::resource('/admin/posts', 'PostController');
 
+	// Categories Routes
+	
 	Route::resource('/admin/categories', 'CategoryController');
+
+	// Photos Routes 
 
 	Route::resource('/admin/photos', 'PhotoController', ['only' => ['index', 'destroy'] ]);
 
@@ -29,12 +44,10 @@ Route::namespace('Admin')->group( function() {
 
 	Route::patch('/admin/comments/replies/{id}', 'ReplyController@update');
 
+	// Comments Routes
 
 	Route::resource('/admin/comments', 'CommentController');
 
-	
-	
-	// Route::resource('/admin/comments/{id}/replies', 'ReplyController');
 });
 
 // Route::get('categories/{slug}', 'HomeController@category_posts');
