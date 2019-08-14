@@ -3,11 +3,11 @@
 
 // Front Users Routes
 
-Route::get('/',function() {
-	return view('home');
-});
+Route::get('/', 'HomeController@index');
 
+Route::get('/post/{slug}', 'HomeController@post');
 
+Route::get('category/{slug}', 'HomeController@category_posts');
 
 
 
@@ -49,8 +49,6 @@ Route::namespace('Admin')->group( function() {
 	Route::resource('/admin/comments', 'CommentController');
 
 });
-
-// Route::get('categories/{slug}', 'HomeController@category_posts');
 
 
 Auth::routes();

@@ -1,9 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.user_layout')
 
 @section('content')
-
-@include('includes.nav')
-
 
 
 <div class="container">

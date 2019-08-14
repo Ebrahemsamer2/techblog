@@ -4,25 +4,49 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Post;
+use App\Category;
+
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
+    public function index()
+    {	
+    	$posts = Post::orderBy('id', 'desc')->paginate(10);
+        $hottest_posts  = Post::withCount('comments')
+        ->orderBy('comments_count', 'desc')->paginate(5);
+
+        $hottest_categories  = Category::withCount('posts')
+        ->orderBy('posts_count', 'desc')->paginate(10);
+    	return view('home', compact('posts', 'hottest_posts', 'hottest_categories'));
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
+     public function post($slug) {
+    	$post = Post::where('slug', '=', $slug)->get()->first();
+
+        $hottest_posts  = Post::withCount('comments')
+        ->orderBy('comments_count', 'desc')->paginate(5);
+        
+        $hottest_categories  = Category::withCount('posts')
+        ->orderBy('posts_count', 'desc')->paginate(10);
+
+    	return view('post', compact('post', 'categories','hottest_posts', 'hottest_categories'));
+    }
+
+    public function category_posts($slug) {
+    	$category = Category::where('slug', '=' , $slug)->get()->first();
+    	$posts = $category->posts;
+
+        $hottest_posts  = Post::withCount('comments')
+        ->orderBy('comments_count', 'desc')->paginate(5);
+
+        $hottest_categories  = Category::withCount('posts')
+        ->orderBy('posts_count', 'desc')->paginate(10);
+        
+    	return view('category_posts', compact('posts', 'hottest_posts', 'hottest_categories'));
     }
 }
