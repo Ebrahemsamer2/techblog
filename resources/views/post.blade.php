@@ -163,6 +163,25 @@
                                     @endforeach
                                 @endif
                             @endforeach
+                            <div class="row">
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-4"><hr></div>
+                                <div class="col-sm-4"></div>
+                            </div>
+                            <div class="add-comment">
+                                <h5>Add Comment</h5>
+                                @auth
+                                {!! Form::open(['method' => 'POST', 'action' => 'Admin\CommentController@store']) !!}
+                                    <div class="form-group">
+                                        {!! Form::textarea('the_comment',null, ['class' => 'form-control', 'placeholder' => 'Your Comment Here...']) !!}
+                                    </div>
+                                    {!! Form::submit('Add Comment', ['class' => 'btn btn-default']) !!}
+                                {!! Form::close() !!}
+                                @endauth
+                                @guest
+                                    <h6>Sorry, You must login to add Comment <a href="">Login</a></h6>
+                                @endguest
+                            </div>
                         </div>
                     </div>
                 </div>
