@@ -6,7 +6,9 @@ body {
 	font-family: 'Lato', sans-serif;
 	background: #101010;
 }
-
+hr {
+	border-color: #fff;
+}
 /* Header */
 
 .header {
@@ -191,10 +193,11 @@ div ul.pagination .page-item.active .page-link {
 	/* Button */
 
 .button-sidebar .sidebar-content a.btn-default {
-	background-color: #3b8a13;
-	border-color: #3b8a13;
 	color: #bfbfbf;
+	border-color: #2f2f2f;
 	width: 94%;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	margin-left: 3%;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -202,10 +205,101 @@ div ul.pagination .page-item.active .page-link {
 }
 .button-sidebar .sidebar-content a.btn-default:hover{
 	color: #fff;
+	background-color: #3b8a13;
+	border-color: #3b8a13;
 }
 
 
+/* Individual Post */
 
+.posts .one-post {
+	margin-bottom: 50px;
+}
+.posts .one-post .post-category {
+	margin-left: 20px;
+	color: #bfbfbf;
+}
+.posts .one-post .post-category a {
+	text-decoration: none;
+	color: #bfbfbf;
+	background: #383838;
+	padding: 3px 15px;
+	margin-left: 10px;
+	border-radius: 7px;
+}
+.posts .one-post .post-category a:hover {
+	color: #fff;
+}
+
+
+/* Author */
+
+
+.author-intro {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	color: #bfbfbf;
+}
+
+.author-intro a.btn-default {
+	color: #bfbfbf;
+	border-color: #3b8a13;
+	background-color: #3b8a13;
+	margin-left: 20px;
+}
+.author-intro a.btn-default:hover {
+	color: #fff;
+}
+
+.author-info {
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+
+/* Comments */
+
+.post-comments {
+	margin-top: 50px;
+	padding: 10px;
+}
+.post-comments > h4 {
+	color: #bfbfbf;
+	margin-bottom: 30px;
+	margin-left: 10px;
+}
+.post-comments .comment {
+	margin-top: 25px;
+}
+.post-comments .comment-info {
+	color: #bfbfbf;
+}
+.post-comments .comment-info h6 {
+	color: grey;
+}
+
+.post-comments .comment-info p.lead {
+	font-size: 18px;
+}
+
+/* Replies */
+
+.replies {
+	margin-top: 20px;
+	color: #bfbfbf;
+}
+.replies .reply {
+	margin-top: 25px;
+}
+
+.post-comments .reply-info h6 {
+	color: grey;
+}
+
+.post-comments .reply-info p.lead {
+	font-size: 18px;
+}
 
 /* Footer */
 
