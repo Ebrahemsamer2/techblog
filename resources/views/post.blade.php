@@ -72,7 +72,14 @@
                                     {{ Session::get('created_comment') }}
                                 </div>
                             @endif
+                            @if(Session::get('created_reply'))
+                                <div class="alert alert-success">
+                                    {{ Session::get('created_reply') }}
+                                </div>
+                            @endif
+                            
                             <h2>Comments</h2>
+                            @include('errors.errors')
                             @foreach($post->comments as $comment)
                                 <div class="comment">
                                     <div class="row">
@@ -84,8 +91,17 @@
                                             @endif
                                         </div>
                                         <div class="col-sm comment-info">
-                                            <h6>{{ $comment->user->name }}</h6>
+                                            <h6>{{ $comment->user->name }} <span>{{ $comment->created_at->diffForHumans() }}</span></h6>
                                             <p class="lead">{{ $comment->the_comment }}</p>
+                                            <span class="reply-btn">Reply</span>
+                                            {!! Form::open(['method' => 'POST', 'action' => 'CommentController@store']) !!}
+                                                <div class="form-group">
+                                                    {!! Form::hidden('comment_id',$comment->id) !!}
+
+                                                    {!! Form::textarea('the_reply',null, ['class' => 'form-control', 'placeholder' => 'Your Reply Here...']) !!}
+                                                </div>
+                                                {!! Form::submit('Reply', ['class' => 'btn btn-default']) !!}
+                                            {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -105,8 +121,8 @@
                                                             @endif
                                                         </div>
                                                         <div class="col-sm reply-info">
-                                                            <h6>{{ $comment->user->name }}</h6>
-                                                            <p class="lead">{{ $comment->the_comment }}</p>
+                                                            <h6>{{ $reply->user->name }}</h6>
+                                                            <p class="lead">{{ $reply->the_reply }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -130,7 +146,7 @@
 
                                         {!! Form::textarea('the_comment',null, ['class' => 'form-control', 'placeholder' => 'Your Comment Here...']) !!}
                                     </div>
-                                    {!! Form::submit('Add Comment', ['class' => 'btn btn-default']) !!}
+                                    {!! Form::submit('Comment', ['class' => 'btn btn-default']) !!}
                                 {!! Form::close() !!}
 <!--                            
                                 @guest

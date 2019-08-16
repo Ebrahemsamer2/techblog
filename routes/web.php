@@ -15,8 +15,10 @@ Route::post('/contact', 'ContactController@mail');
 
 
 
-// Adding Comments
+// Adding Comments and Replies
+
 Route::post('/post', 'CommentController@store');
+
 
 // Admin Routes  
 

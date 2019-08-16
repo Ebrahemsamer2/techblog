@@ -23,4 +23,8 @@ $(document).ready(function(){
 	});
 
 
+	$('.post-comments .comment-info span.reply-btn').on('click', function() {
+		$('.post-comments .comment-info form').fadeIn(300);
+	});
+
 });

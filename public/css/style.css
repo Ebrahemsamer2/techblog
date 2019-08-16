@@ -279,6 +279,10 @@ div ul.pagination .page-item.active .page-link {
 .post-comments .comment-info h6 {
 	color: grey;
 }
+.post-comments .comment-info h6 span{
+	font-size: 13px;
+	margin-left: 5px;
+}
 
 .post-comments .comment-info p.lead {
 	font-size: 18px;
@@ -307,6 +311,7 @@ div ul.pagination .page-item.active .page-link {
 
 .add-comment textarea:focus {
 	background: #101010;
+	color: #fff;
 }
 
 .add-comment form .btn-default {
@@ -325,6 +330,9 @@ div ul.pagination .page-item.active .page-link {
 } 
 
 
+
+
+
 /* Replies */
 
 .replies {
@@ -341,6 +349,40 @@ div ul.pagination .page-item.active .page-link {
 
 .post-comments .reply-info p.lead {
 	font-size: 18px;
+}
+
+
+
+
+/* Add Reply */
+
+.post-comments .comment-info span.reply-btn {
+	color: #791313;
+	cursor: pointer;
+}
+.post-comments .comment-info form {
+	margin-top: 10px;
+	display: none;
+}
+.post-comments .comment-info form textarea {
+	width: 95%;
+	background: #101010;
+	height: 100px;
+	max-height: 150px;
+	color: #fff;
+}
+
+.post-comments .comment-info form textarea:focus {
+	background: #101010;
+}
+
+.post-comments .comment-info form .btn-default {
+	color: #bfbfbf;
+	border-color: #3b8a13;
+	background-color: #3b8a13;
+}
+.post-comments .comment-info form .btn-default:hover{
+	color: #fff;
 }
 
 
