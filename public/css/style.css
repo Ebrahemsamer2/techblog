@@ -342,6 +342,36 @@ div ul.pagination .page-item.active .page-link {
 	font-size: 18px;
 }
 
+
+/* Contact */
+
+#contact {
+	margin-top: 50px;
+}
+#contact h2 {
+	color: #fff;
+	margin-bottom: 20px;
+}
+#contact form .btn-default {
+	color: #bfbfbf;
+	background: #791313;
+	border-color: #791313;
+}
+#contact form .btn-default:hover {
+	color: #fff;
+}
+
+#contact form input[type="text"] {
+	background: #232323;
+	color: #fff;
+}
+
+
+#contact form textarea {
+	background: #232323;
+	color: #fff;
+}
+
 /* Footer */
 
 footer .top p {

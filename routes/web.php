@@ -9,7 +9,9 @@ Route::get('/post/{slug}', 'HomeController@post');
 
 Route::get('category/{slug}', 'HomeController@category_posts');
 
+Route::get('/contact', 'ContactController@index');
 
+Route::post('/contact', 'ContactController@mail');
 
 // Admin Routes  
 
