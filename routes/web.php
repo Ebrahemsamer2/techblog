@@ -13,6 +13,11 @@ Route::get('/contact', 'ContactController@index');
 
 Route::post('/contact', 'ContactController@mail');
 
+
+
+// Adding Comments
+Route::post('/post', 'CommentController@store');
+
 // Admin Routes  
 
 Route::namespace('Admin')->group( function() {

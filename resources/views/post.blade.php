@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-sm-8">
                     <div class="posts">
-                        <div class="post one-post">
+                        <div class="post one-post" id="post">
                             <div class="post-image">
                                 <a href="/post/{{ $post->slug }}">
                                     <img class="img-fluid" src="{{ asset('/images/' . $post->photo->filename)}}">
@@ -66,7 +66,12 @@
                             <div class="col-sm-4"><hr></div>
                             <div class="col-sm-4"></div>
                         </div>
-                        <div class="post-comments">
+                        <div class="post-comments" id="comments">
+                            @if(Session::get('created_comment'))
+                                <div class="alert alert-success">
+                                    {{ Session::get('created_comment') }}
+                                </div>
+                            @endif
                             <h2>Comments</h2>
                             @foreach($post->comments as $comment)
                                 <div class="comment">
@@ -119,17 +124,18 @@
                             </div>
                             <div class="add-comment">
                                 <h5>Add Comment</h5>
-                                @auth
-                                {!! Form::open(['method' => 'POST', 'action' => 'Admin\CommentController@store']) !!}
+                                {!! Form::open(['method' => 'POST', 'action' => 'CommentController@store']) !!}
                                     <div class="form-group">
+                                        {!! Form::hidden('post_id',$post->id) !!}
+
                                         {!! Form::textarea('the_comment',null, ['class' => 'form-control', 'placeholder' => 'Your Comment Here...']) !!}
                                     </div>
                                     {!! Form::submit('Add Comment', ['class' => 'btn btn-default']) !!}
                                 {!! Form::close() !!}
-                                @endauth
+<!--                            
                                 @guest
                                     <h6>Sorry, You must login to add Comment <a href="">Login</a></h6>
-                                @endguest
+                                @endguest -->
                             </div>
                         </div>
                     </div>

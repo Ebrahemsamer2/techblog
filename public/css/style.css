@@ -302,6 +302,7 @@ div ul.pagination .page-item.active .page-link {
 	background: #101010;
 	height: 100px;
 	max-height: 150px;
+	color: #fff;
 }
 
 .add-comment textarea:focus {
