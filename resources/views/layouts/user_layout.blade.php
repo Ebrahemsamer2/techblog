@@ -37,17 +37,41 @@
             <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="#">Categories</a>
+            <li class="nav-item list">
+              <a class="nav-link" href="#">Categories <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+
+              <div class="nav-categories">
+              		@foreach(\App\Category::all() as $cat)
+              			<a href="/category/{{ $cat->name }}">{{ $cat->name }}</a>
+              		@endforeach
+              </div>
+
             </li>
             <li class="nav-item {{ Request::is('/contact') ? 'active' : '' }}">
-              <a class="nav-link" href="contact">Contact</a>
+              <a class="nav-link" href="/contact#contact">Contact</a>
             </li>
             <li class="nav-item {{ Request::is('/about') ? 'active' : '' }}">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="/about">About</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">User</a>
+            <li class="nav-item user-list">
+            	@auth
+              		<a class="nav-link" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              			{{ \Illuminate\Support\Facades\Auth::user()->name }}
+              		</a>
+              	@endauth
+          		@guest
+          			<a class="nav-link" href="/login">Login</a>
+          		@endguest
+              	
+              	@auth
+	             	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          	<a class="dropdown-item" href="/user/{{ \Illuminate\Support\Facades\Auth::user()->name }}/profile#profile">Profile</a>
+			          	<a class="dropdown-item" href="/create_article">Write Article</a>
+			          	<div class="dropdown-divider"></div>
+			          	<a class="dropdown-item" href="/logout">Logout</a>
+			        </div>
+		        @endauth
+
             </li>
           </ul>
         </div>
@@ -70,7 +94,6 @@
 </div>
 
 	@yield('content')
-
 
 	<!-- Footer -->
 	<footer class="page-footer font-small cyan darken-3">

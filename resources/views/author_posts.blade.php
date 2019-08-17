@@ -1,12 +1,12 @@
 @extends('layouts.user_layout')
 
-@section('title', 'Posts Category | TechBlog')
+@section('title', 'Author Posts | TechBlog')
 
  @section('content')
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <div class="posts">
+                    <div class="posts" id="posts">
                         @if(count($posts) > 0)
                         @foreach($posts as $post)
                             <div class="post">
@@ -41,7 +41,7 @@
                         @else
 
                             <div class="no-posts">
-                                <p class="lead">Sorry, No Posts in this Category</p>
+                                <p class="lead">Sorry, Author does not have any posts</p>
                             </div>
 
                         @endif

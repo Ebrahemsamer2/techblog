@@ -27,8 +27,9 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             $table->softDeletes();
-            
             $table->bigInteger('photo_id')->nullable();
+
+            $table->foreign('photo_id')->references('id')->on('photos');
         });
     }
 

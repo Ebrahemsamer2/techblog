@@ -33,8 +33,8 @@ class Handler extends ExceptionHandler
         }
 
         
-        if($exception instanceof QueryException) {
-            return response()->view('errors.connection');
+        if($exception instanceof ErrorException) {
+            return response()->view('errors.ExceptionError');
         }
 
 

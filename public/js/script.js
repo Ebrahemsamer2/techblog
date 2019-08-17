@@ -22,9 +22,22 @@ $(document).ready(function(){
 		$("#user-drop-menu").css('display', 'none');
 	});
 
-
+	// Reply on the Comment 
 	$('.post-comments .comment-info span.reply-btn').on('click', function() {
 		$(this).next('form').fadeIn(300);
+	});
+
+	// Category on the navbar
+
+	$(".list > a").on('click', function(e) {		
+		e.preventDefault();
+	});
+
+	$(".nav-item.list").hover(function(e) {
+		e.stopPropagation();
+		$(".nav-categories").fadeIn(300);
+	},function() {
+		$(".nav-categories").fadeOut(300);
 	});
 
 });

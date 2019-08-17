@@ -11,6 +11,44 @@ hr {
 	border-width: thin;
 }
 
+.active a {
+	color: #fff;
+}
+
+
+/* Login Page */
+
+#app nav {
+	background: #101010;
+}
+
+#app nav a {
+	color: #bfbfbf;
+}
+#app nav a:hover {
+	color: #fff;
+}
+#app .card {
+	background: #151414;
+}
+#app .card {
+	color: #fff;
+}
+#app .card .btn-primary {
+	color: #bfbfbf;
+	background: #791313;
+	border-color: #791313;
+}
+#app .card .btn-primary:hover {
+	color: #fff;
+}
+
+
+
+
+
+
+
 /* 404  Error Page */
 
 .error-404 {
@@ -52,7 +90,51 @@ hr {
 .error-404 .buttons a:hover {
 	color: #fff
 }
+
+
+/* No posts */
+.no-posts {
+	padding: 20px;
+	color: #fff;
+}
+
+
+
 /* Header */
+
+
+/* Navbar Categories */
+
+.nav-categories {
+    position: absolute;
+    color: #fff;
+    background: #101010;
+    width: 90%;
+    margin-left: 5%;
+    padding: 10px;
+    left: 0;
+    display: none;
+}
+
+.nav-categories a { 
+	color: #fff;
+	margin-left: 30px;
+	text-decoration: none;
+}
+
+.dropdown-menu {
+	left: 1064px;
+	top: 65px;
+    position: absolute;
+}
+
+.dropdown-menu .dropdown-item {
+	font-size: 18px;
+}
+
+.dropdown-menu .dropdown-item:hover {
+	color: #791313;
+}
 
 .header {
 	height: 100vh;
@@ -124,6 +206,9 @@ hr {
 	background: #791313;
 	border-color: #791313;
 }
+
+
+
 
 /* Posts */
 
@@ -401,6 +486,7 @@ div ul.pagination .page-item.active .page-link {
 .post-comments .comment-info span.reply-btn {
 	color: #791313;
 	cursor: pointer;
+	font-weight: bold;
 }
 .post-comments .comment-info form {
 	margin-top: 10px;
@@ -505,4 +591,57 @@ footer .container-fluid div div div a i.fa-youtube {
 footer .flex-center {
 	text-align: center;
 	margin: auto;
+}
+
+
+
+/* User Profile */
+
+.profile {
+	margin-top: 40px;
+}
+.profile .user-info p {
+	padding:0;
+	margin:0;
+	font-size: 25px;
+}
+.profile .user-info p:nth-child(1) {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.profile .user-info {
+	color: #bfbfbf;
+	margin-top: 20px;
+}
+
+.profile .user-info a.btn-default {
+	margin-top: 10px;
+	margin-left: 0;
+}
+
+.profile h1 {
+	margin-top: 40px;
+	padding: 0;
+	font-weight: 100px;
+	color: #fff;
+}
+.profile .row {
+	margin-bottom: 30px;
+	margin-top: 50px;
+}
+.profile .btn-default {
+	color: #bfbfbf;
+	background: #791313;
+	border-color: #791313;
+	margin-left: 10px;
+}
+.profile .btn-default:hover {
+	color: #fff;
+}
+
+.profile-posts p.lead {
+	font-size: 25px;
+	color: #bfbfbf;
+	margin-top: 20px;
+	margin-left: 5px;
 }

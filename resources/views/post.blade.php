@@ -56,7 +56,7 @@
                                     <h6>Created By</h6>
                                     <h5>{{ $post->user->name }}</h5>
                                     <span>{{ $post->user->email }}</span>
-                                    <a href="" class="btn btn-default btn-sm">Author Posts</a>
+                                    <a href="/user/{{ $post->user->name }}#posts" class="btn btn-default btn-sm">Author Posts</a>
                                 </div>
                             </div>
                             
@@ -93,7 +93,12 @@
                                         <div class="col-sm comment-info">
                                             <h6>{{ $comment->user->name }} <span>{{ $comment->created_at->diffForHumans() }}</span></h6>
                                             <p class="lead">{{ $comment->the_comment }}</p>
+                                            @auth
                                             <span class="reply-btn">Reply</span>
+                                            @endauth
+                                            @guest
+                                            <h6>Sorry, You must login to add Reply <a href="/login">Login</a></h6>
+                                            @endguest
                                             {!! Form::open(['method' => 'POST', 'action' => 'CommentController@store']) !!}
                                                 <div class="form-group">
                                                     {!! Form::hidden('comment_id',$comment->id) !!}
@@ -140,6 +145,7 @@
                             </div>
                             <div class="add-comment">
                                 <h5>Add Comment</h5>
+                                @auth
                                 {!! Form::open(['method' => 'POST', 'action' => 'CommentController@store']) !!}
                                     <div class="form-group">
                                         {!! Form::hidden('post_id',$post->id) !!}
@@ -148,10 +154,10 @@
                                     </div>
                                     {!! Form::submit('Comment', ['class' => 'btn btn-default']) !!}
                                 {!! Form::close() !!}
-<!--                            
+                                @endauth
                                 @guest
-                                    <h6>Sorry, You must login to add Comment <a href="">Login</a></h6>
-                                @endguest -->
+                                    <h6>Sorry, You must login to add Comment <a href="/login">Login</a></h6>
+                                @endguest
                             </div>
                         </div>
                     </div>
