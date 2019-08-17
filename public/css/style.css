@@ -10,6 +10,48 @@ hr {
 	border-color: #fff;
 	border-width: thin;
 }
+
+/* 404  Error Page */
+
+.error-404 {
+	padding: 0;
+	margin:0;
+}
+
+.error-404 p {
+	padding-top: 150px;
+	font-size: 30px;
+	color: #fff;
+	text-align: center;
+	margin: 0;
+}
+.error-404 .error-text {
+	padding-top: 10px;
+}
+.error-404 h1 {
+	font-size: 200px;
+	text-align: center;
+	color: #fff;
+	margin: 0;
+	padding: 0;
+}
+.error-404 .buttons {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+.error-404 .buttons a {
+	color: #bfbfbf;
+	background: #791313;
+	border-color: #791313;
+	padding: 10px 20px;
+	text-decoration: none;
+	border-radius: 3px;
+	margin: 0;
+}
+.error-404 .buttons a:hover {
+	color: #fff
+}
 /* Header */
 
 .header {
