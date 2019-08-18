@@ -80,8 +80,4 @@ class HomeController extends Controller
             return abort(404);
         }
     }
-
-    public function create_article() {
-        return view('create_article');
-    }
 }

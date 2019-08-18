@@ -222,6 +222,7 @@ hr {
 .posts .post .post-image a img {
 	transform: scale(.985, .985);
 	transition: .3s ease-in;
+	min-width: 100%;
 }
 .posts .post .post-image a img:hover {
 	transform: scale(1, 1);

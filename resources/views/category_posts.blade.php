@@ -12,7 +12,11 @@
                             <div class="post">
                                 <div class="post-image">
                                     <a href="/post/{{ $post->slug }}">
-                                        <img class="img-fluid" src="{{ asset('/images/' . $post->photo->filename)}}">
+                                        @if($post->photo)
+                                            <img class="img-fluid" src="{{ asset('/images/' . $post->photo->filename)}}">
+                                        @else
+                                            <img class="img-fluid" src="{{ asset('/images/post.jpg')}}">
+                                        @endif
                                     </a>
                                 </div>
                                 <div class="post-title">

@@ -18,7 +18,10 @@ Route::get('/user/{name}', 'HomeController@author_posts')->middleware('auth');
 // Profile route
 Route::get('/user/{name}/profile', 'HomeController@user_profile')->middleware('auth');
 
-Route::get('/create_article', 'HomeController@create_article')->middleware('auth');
+// Post Routes
+Route::get('/create_article', 'PostController@create_article')->middleware('auth');
+
+Route::post('/create_article', 'PostController@store')->middleware('auth');
 
 
 

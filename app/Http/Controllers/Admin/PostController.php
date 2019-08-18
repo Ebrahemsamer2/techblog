@@ -40,8 +40,9 @@ class PostController extends Controller
 
         $this->validate($request, $rules);
 
-        // $user = Auth::user();
         $data = $request->all();
+        
+        $user_id = Auth::user()->id;
 
         if($request->has('photo_id')) {
 
@@ -55,7 +56,7 @@ class PostController extends Controller
             $photo = Photo::create(['filename'=>$file_to_store]);
             $data['photo_id'] = $photo->id;
         }
-        $data['user_id'] = 1;
+        $data['user_id'] = $user_id;
         Post::create($data);
 
         Session::flash('Created_post', 'Post has been created');
