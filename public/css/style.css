@@ -676,3 +676,9 @@ footer .flex-center {
 .user-info-form .btn-default:hover {
 	color: #fff;
 }
+
+.user-info-form form p.js-error {
+	color: red;
+	margin-top: 10px;
+	margin-left: 10px;
+}

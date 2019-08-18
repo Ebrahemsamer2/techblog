@@ -41,7 +41,7 @@ $(document).ready(function(){
 	});
 
 
-	// Comments and Replies Validation
+	// Reply Validation
 
 	$(".comment-info form").submit(function() {
 		let reply = $(".comment-info form textarea[name='the_reply']").val();
@@ -63,6 +63,8 @@ $(document).ready(function(){
 		return true;
 	});
 
+	// Comment Validation
+
 	$(".add-comment form").submit(function() {
 		let comment = $(".add-comment form textarea[name='the_comment']").val();
 
@@ -78,6 +80,83 @@ $(document).ready(function(){
 			return false;
 		}else {
 			$(".add-comment form textarea[name='the_comment'] + p").text("");
+		}
+
+		return true;
+	});
+
+	// Updating User Profile Validation
+
+	$(".user-info-form form").submit(function() {
+		let name = $(".user-info-form form input[type='text']").val();
+		let email = $(".user-info-form form input[type='email']").val();
+		let password = $(".user-info-form form input[type='password']:nth-child(1)").val();
+		let confirm_password = $(".user-info-form form input[name='confirm_password']").val();
+
+		if(name.length <= 5) {
+			$(".user-info-form form input[type='text'] + p").text("Username must be more than 5 Character.");
+			return false;
+		}else {
+			$(".user-info-form form input[type='text'] + p").text("");
+		}
+
+		if(name.length > 20) {
+			$(".user-info-form form input[type='text'] + p").text("Username must be less than 21 Character.");
+			return false;
+		}else {
+			$(".user-info-form form input[type='text'] + p").text("");
+		}
+
+
+		if(email.length <= 15) {
+			$(".user-info-form form input[type='email'] + p").text("Email must be more than 15 Character.");
+			return false;
+		}else {
+			$(".user-info-form form input[type='email'] + p").text("");
+		}
+
+		if(email.length > 50) {
+			$(".user-info-form form input[type='email'] + p").text("Email must be less than 50 Character.");
+			return false;
+		}else {
+			$(".user-info-form form input[type='email'] + p").text("");
+		}
+
+		if(password.length != 0) {
+			if(password.length <= 5) {
+				$(".user-info-form form input[type='password'] + p").text("Password must be more than 5 Character.");
+				return false;
+			}else {
+				$(".user-info-form form input[type='password'] + p").text("");
+			}
+
+			if(password.length >= 20) {
+				$(".user-info-form form input[type='password'] + p").text("Password must be less than 20 Character.");
+				return false;
+			}else {
+				$(".user-info-form form input[type='password'] + p").text("");
+			}
+
+			if(confirm_password.length <= 5) {
+				$(".user-info-form form input[name='confirm_password'] + p").text("Password Confirmation must be more than 5 Character.");
+				return false;
+			}else {
+				$(".user-info-form form input[name='confirm_password'] + p").text("");
+			}
+
+			if(confirm_password.length >= 20) {
+				$(".user-info-form form input[name='confirm_password'] + p").text("Password Confirmation must be less than 20 Character.");
+				return false;
+			}else {
+				$(".user-info-form form input[name='confirm_password'] + p").text("");
+			}
+
+			if($password !== $confirm_password) {
+				$(".user-info-form form input[name='confirm_password'] + p").text("Password Confirmation must be Equal the password.");
+				return false;
+			}else {
+				$(".user-info-form form input[name='confirm_password'] + p").text("");
+			}
 		}
 
 		return true;

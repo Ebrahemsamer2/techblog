@@ -33,13 +33,25 @@
 						@endif
 
 						{!! Form::model($user,['method' => 'PATCH', 'action' => ['UserController@update_profile',$user->id],'files' => true ]) !!}
-
-						{!! Form::text('name', null, ['class' => 'form-control']) !!}
-						
-						{!! Form::email('email', null, ['class' => 'form-control']) !!}
-						
-						{!! Form::file('photo_id', null, ['class' => 'form-control']) !!}
-							<br>
+						<div class="form-group">
+							{!! Form::text('name', null, ['class' => 'form-control']) !!}
+							<p class="js-error"></p>
+						</div>
+						<div class="form-group">
+							{!! Form::email('email', null, ['class' => 'form-control']) !!}
+							<p class="js-error"></p>
+						</div>
+						<div class="form-group">
+							{!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) !!}
+							<p class="js-error"></p>
+						</div>
+						<div class="form-group">
+							{!! Form::password('confirm_password', ['class' => 'form-control','placeholder' => 'Confirm Password']) !!}
+							<p class="js-error"></p>
+						</div>
+						<div class="form-group">
+							{!! Form::file('photo_id', null, ['class' => 'form-control']) !!}
+						</div>
 						{!! Form::submit('Update Profile', ['class' => 'btn btn-default']) !!}
 
 						{!! Form::close() !!}

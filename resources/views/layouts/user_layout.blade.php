@@ -56,7 +56,7 @@
             <li class="nav-item user-list">
             	@auth
               		<a class="nav-link" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              			{{ \Illuminate\Support\Facades\Auth::user()->name }}
+              			{{ Str::limit(Auth::user()->name,10) }}
               		</a>
               	@endauth
           		@guest
@@ -88,8 +88,8 @@
       </div>
   </div>
   <div class="bottom">
-      <a href="" class="btn btn-default write">Write Articles</a>
-      <a href="" class="btn btn-success read">Read Articles</a>
+      <a href="/create_article" class="btn btn-default write">Write Articles</a>
+      <a href="/#post" class="btn btn-success read">Read Articles</a>
   </div>
 </div>
 

@@ -19,7 +19,7 @@ class UserController extends Controller
     public function update_profile(Request $request, $id) {
         
         $user = User::findOrFail($id);
-
+        
         if($request->has('name')) {
             $user->name = $request->name;
         }
@@ -45,8 +45,21 @@ class UserController extends Controller
 
         }
 
+        if($request->has('password')) {
+
+            $password = $request->password;
+            $confirmpassword = $request->confirm_password;
+            if(strlen($password) !== 0) {
+                if($password === $confirmpassword) {
+                    $new_password = password_hash($password, PASSWORD_DEFAULT);
+                    $user->password = $new_password;
+                }
+            }
+        }
+
         if($user->isClean()) {
             Session::flash('nothing-changed', 'Nothing Changed');
+            return redirect('/user/'.$id.'/profile/edit#edit-form');
         }else {
             $user->save();
             Session::flash('updated_user', 'User has been updated.');

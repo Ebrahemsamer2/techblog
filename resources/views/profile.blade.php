@@ -20,7 +20,7 @@
 						<p class="lead">{{ $user->name }}</p>
 						<p class="lead">{{ $user->email }}</p>
 						<p class="">{{ $user->admin == 1 ? 'Admin ' : 'User ' . $user->created_at->diffForHumans() }}</p>
-						<a href="/user/{{ $user->id }}/profile/edit" class="btn btn-default">Edit Profile</a>
+						<a href="/user/{{ $user->id }}/profile/edit#edit-form" class="btn btn-default">Edit Profile</a>
 					</div>
 				</div>
 				<div class="col-sm-3">
@@ -59,7 +59,7 @@
 										  	<div class="card-body">
 										    	<h5 title="{{ $post->title }}" class="card-title">{{ Str::limit($post->title, 20) }}</h5>
 										    	<p class="card-text">{{ Str::limit($post->content,50) }}</p>
-										    	<a href="/post/{$post->slug}#post" class="btn btn-primary">Read More</a>
+										    	<a href="/post/{{ $post->slug }}#post" class="btn btn-primary">Read More</a>
 										  	</div>
 										</div>
 									</div>

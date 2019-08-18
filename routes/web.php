@@ -1,5 +1,9 @@
 <?php
 
+// Email Verification
+Route::get('/user/verifiy/{token}', 'UserController@verify');
+
+
 
 // Front Users Routes
 
