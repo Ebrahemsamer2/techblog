@@ -40,4 +40,47 @@ $(document).ready(function(){
 		$(".nav-categories").fadeOut(300);
 	});
 
+
+	// Comments and Replies Validation
+
+	$(".comment-info form").submit(function() {
+		let reply = $(".comment-info form textarea[name='the_reply']").val();
+
+		if(reply.length <= 5) {
+			$(".comment-info form textarea[name='the_reply'] + p").text("Reply must be more than 5 Character.");
+			return false;
+		}else {
+			$(".comment-info form textarea[name='the_reply'] + p").text("");
+		}
+
+		if(reply.length > 300) {
+			$(".comment-info form textarea[name='the_reply'] + p").text("Reply must be less than 300 Character.");
+			return false;
+		}else {
+			$(".comment-info form textarea[name='the_reply'] + p").text("");
+		}
+
+		return true;
+	});
+
+	$(".add-comment form").submit(function() {
+		let comment = $(".add-comment form textarea[name='the_comment']").val();
+
+		if(comment.length <= 5) {
+			$(".add-comment form textarea[name='the_comment'] + p").text("Comment must be more than 5 Character.");
+			return false;
+		}else {
+			$(".add-comment form textarea[name='the_comment'] + p").text("");
+		}
+
+		if(comment.length > 300) {
+			$(".add-comment form textarea[name='the_comment'] + p").text("Comment must be less than 300 Character.");
+			return false;
+		}else {
+			$(".add-comment form textarea[name='the_comment'] + p").text("");
+		}
+
+		return true;
+	});
+
 });

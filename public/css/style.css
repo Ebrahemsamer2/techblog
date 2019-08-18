@@ -436,7 +436,9 @@ div ul.pagination .page-item.active .page-link {
 	max-height: 150px;
 	color: #fff;
 }
-
+.add-comment form textarea + p {
+	color: red;
+}
 .add-comment textarea:focus {
 	background: #101010;
 	color: #fff;
@@ -499,6 +501,10 @@ div ul.pagination .page-item.active .page-link {
 	height: 100px;
 	max-height: 150px;
 	color: #fff;
+}
+
+.comment-info form textarea + p {
+	color: red;
 }
 
 .post-comments .comment-info form textarea:focus {

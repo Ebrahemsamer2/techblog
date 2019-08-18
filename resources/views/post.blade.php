@@ -112,7 +112,9 @@
                                                     {!! Form::hidden('comment_id',$comment->id) !!}
 
                                                     {!! Form::textarea('the_reply',null, ['class' => 'form-control', 'placeholder' => 'Your Reply Here...']) !!}
+                                                    <p style="margin-top: 10px;margin-left: 10px"></p>
                                                 </div>
+                                                
                                                 {!! Form::submit('Reply', ['class' => 'btn btn-default']) !!}
                                             {!! Form::close() !!}
                                         </div>
@@ -159,6 +161,7 @@
                                         {!! Form::hidden('post_id',$post->id) !!}
 
                                         {!! Form::textarea('the_comment',null, ['class' => 'form-control', 'placeholder' => 'Your Comment Here...']) !!}
+                                        <p style="margin-top: 10px;margin-left: 10px"></p>
                                     </div>
                                     {!! Form::submit('Comment', ['class' => 'btn btn-default']) !!}
                                 {!! Form::close() !!}

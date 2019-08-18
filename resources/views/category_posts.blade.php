@@ -11,7 +11,7 @@
                         @foreach($posts as $post)
                             <div class="post" id="posts">
                                 <div class="post-image">
-                                    <a href="/post/{{ $post->slug }}">
+                                    <a href="/post/{{ $post->slug }}#post">
                                         @if($post->photo_id)
                                         @if(file_exists(public_path('/images/') . $post->photo->filename))
                                             <img src="{{ asset('/images/'. $post->photo->filename) }}" class="img-fluid" alt="Card image cap">
@@ -24,7 +24,7 @@
                                     </a>
                                 </div>
                                 <div class="post-title">
-                                    <a title="{{ $post->slug }}" href="/post/{{ $post->slug }}">
+                                    <a title="{{ $post->slug }}" href="/post/{{ $post->slug }}#post">
                                         <h5>{{ $post->title }}</h5>
                                     </a>
                                 </div>
