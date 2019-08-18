@@ -67,6 +67,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'slug' => $slug,
         'photo_id' => Photo::all()->random()->id,
         'category_id' => Category::all()->random()->id,
+        'published' => $faker->randomElement([0,1,1,1,1,1]),
     ];
 });
 

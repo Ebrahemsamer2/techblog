@@ -28,8 +28,6 @@ class CreateUsersTable extends Migration
 
             $table->softDeletes();
             $table->bigInteger('photo_id')->nullable();
-
-            $table->foreign('photo_id')->references('id')->on('photos');
         });
     }
 

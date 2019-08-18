@@ -11,10 +11,14 @@
                         <div class="post one-post" id="post">
                             <div class="post-image">
                                 <a href="/post/{{ $post->slug }}">
-                                    @if($post->photo)
-                                        <img class="img-fluid" src="{{ asset('/images/' . $post->photo->filename)}}">
-                                    @else
-                                        <img class="img-fluid" src="{{ asset('/images/post.jpg')}}">
+                                    @if($post->photo_id)
+                                        @if(file_exists(public_path('/images/') . $post->photo->filename))
+                                            <img src="{{ asset('/images/' . $post->photo->filename) }}" class="img-fluid" alt="Card image cap">
+                                        @else
+                                            <img class="img-fluid" src="{{ asset('/images/post.jpg')}}">
+                                        @endif
+                                    @else 
+                                        <img class="img-fluid" src="{{ asset('/images/post.jpg')}}">    
                                     @endif
                                 </a>
                             </div>

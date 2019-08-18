@@ -42,7 +42,7 @@
 
               <div class="nav-categories">
               		@foreach(\App\Category::all() as $cat)
-              			<a href="/category/{{ $cat->name }}">{{ $cat->name }}</a>
+              			<a href="/category/{{ $cat->name }}#posts">{{ $cat->name }}</a>
               		@endforeach
               </div>
 

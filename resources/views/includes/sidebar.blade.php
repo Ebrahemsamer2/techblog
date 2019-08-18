@@ -9,12 +9,12 @@
                 <div class="sidebar-post">
                     <div class="row">
                         <div class="col-sm-3">
-                            <a href="/post/{{ $post->slug }}">
+                            <a href="/post/{{ $post->slug }}#post">
                                 <img src="{{ asset('/images/' . $post->photo->filename) }}" height="60" width="60" class="">
                             </a>
                         </div>
                         <div class="col-sm">
-                            <a title="{{ $post->slug }}" class="" href="/post/{{ $post->slug }}"><h6>{{ Str::limit($post->title, 80) }}</h6></a>
+                            <a title="{{ $post->slug }}" class="" href="/post/{{ $post->slug }}#post"><h6>{{ Str::limit($post->title, 80) }}</h6></a>
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
     <div class="sidebar-content">
         <div class="container-fluid">
             @foreach($hottest_categories as $category)
-                <a title="{{ $category->slug }}" class="" href="/category/{{ $category->slug }}">{{ $category->name}}</a>  
+                <a title="{{ $category->slug }}" class="" href="/category/{{ $category->slug }}#posts">{{ $category->name}}</a>  
             @endforeach
         </div>
     </div>
@@ -41,6 +41,6 @@
         <h5>Share Your knowledge</h5>
     </div>
     <div class="sidebar-content">
-        <a href="" class="btn btn-default">Write Your First Article</a>
+        <a href="/create_article" class="btn btn-default">Write Your First Article</a>
     </div>
 </div>

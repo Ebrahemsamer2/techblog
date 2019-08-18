@@ -9,12 +9,16 @@
                     <div class="posts">
                         @if(count($posts) > 0)
                         @foreach($posts as $post)
-                            <div class="post">
+                            <div class="post" id="posts">
                                 <div class="post-image">
                                     <a href="/post/{{ $post->slug }}">
-                                        @if($post->photo)
-                                            <img class="img-fluid" src="{{ asset('/images/' . $post->photo->filename)}}">
+                                        @if($post->photo_id)
+                                        @if(file_exists(public_path('/images/') . $post->photo->filename))
+                                            <img src="{{ asset('/images/'. $post->photo->filename) }}" class="img-fluid" alt="Card image cap">
                                         @else
+                                            <img class="img-fluid" src="{{ asset('/images/post.jpg')}}">
+                                        @endif
+                                        @else 
                                             <img class="img-fluid" src="{{ asset('/images/post.jpg')}}">
                                         @endif
                                     </a>
