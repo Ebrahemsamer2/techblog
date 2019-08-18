@@ -84,4 +84,14 @@ class UserController extends Controller
         }
     }
 
+    public function verify($token) {   
+        $user = User::where('verification_token', '=' , $token)->get()->first();
+        $user->verified = 1;
+        $user->verification_token = null;
+
+        $user->save();
+
+        return redirect('/');
+    }
+
 }

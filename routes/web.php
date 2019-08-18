@@ -1,7 +1,7 @@
 <?php
 
 // Email Verification
-Route::get('/user/verifiy/{token}', 'UserController@verify');
+Route::name('verify')->get('/user/verify/{$token}', 'UserController@verify')->middleware('auth');
 
 
 
