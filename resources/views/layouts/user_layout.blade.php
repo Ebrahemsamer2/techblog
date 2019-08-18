@@ -65,7 +65,7 @@
               	
               	@auth
 	             	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-			          	<a class="dropdown-item" href="/user/{{ \Illuminate\Support\Facades\Auth::user()->name }}/profile#profile">Profile</a>
+			          	<a class="dropdown-item" href="/user/{{ \Illuminate\Support\Facades\Auth::user()->id }}/profile#profile">Profile</a>
 			          	<a class="dropdown-item" href="/create_article">Write Article</a>
 			          	<div class="dropdown-divider"></div>
 			          	<a class="dropdown-item" href="/logout">Logout</a>

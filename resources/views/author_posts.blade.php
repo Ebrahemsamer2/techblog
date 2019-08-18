@@ -11,12 +11,12 @@
                         @foreach($posts as $post)
                             <div class="post">
                                 <div class="post-image">
-                                    <a href="/post/{{ $post->slug }}">
+                                    <a href="/post/{{ $post->slug }}#post">
                                         <img class="img-fluid" src="{{ asset('/images/' . $post->photo->filename)}}">
                                     </a>
                                 </div>
                                 <div class="post-title">
-                                    <a title="{{ $post->slug }}" href="/post/{{ $post->slug }}">
+                                    <a title="{{ $post->slug }}" href="/post/{{ $post->slug }}#post">
                                         <h5>{{ $post->title }}</h5>
                                     </a>
                                 </div>
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="post-content">
                                     <p class="lead">{{ Str::limit($post->content,200) }}</p>
-                                    <a href="/post/{{ $post->slug }}" class="btn btn-default">Read More</a>
+                                    <a href="/post/{{ $post->slug }}#post" class="btn btn-default">Read More</a>
                                 </div>
                             </div>
                         @endforeach

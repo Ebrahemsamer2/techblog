@@ -20,13 +20,13 @@
 						<p class="lead">{{ $user->name }}</p>
 						<p class="lead">{{ $user->email }}</p>
 						<p class="">{{ $user->admin == 1 ? 'Admin ' : 'User ' . $user->created_at->diffForHumans() }}</p>
-						<a href="/user/profile/edit" class="btn btn-default">Edit Profile</a>
+						<a href="/user/{{ $user->id }}/profile/edit" class="btn btn-default">Edit Profile</a>
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<h1>{{ count($user->posts) }} Articles</h1>
 					@if(count($user->posts) == 0)
-						<a class="btn btn-default" href="/">Create Your First</a>
+						<a class="btn btn-default" href="/create_article">Create Your First</a>
 					@endif
 				</div>
 			</div>
@@ -48,12 +48,14 @@
 									<div class="post">
 										<div class="card" style="width: 18rem;">
 											@if($post->photo_id)
-											  	@if(file_exists(public_path('/images/') . $post->photo->filename))
-											  		<img src="{{ $post->photo->filename }}" class="card-img-top img-fluid" alt="Card image cap">
-											  	@endif
-											@else 
-												<img class="img-fluid" src="{{ asset('/images/post.jpg')}}">  	
-										  	@endif
+		                                        @if(file_exists(public_path('/images/') . $post->photo->filename))
+		                                        <img src="{{ asset('/images/'. $post->photo->filename) }}" class="img-fluid" alt="Card image cap">
+		                                        @else
+		                                        <img class="img-fluid" src="{{ asset('/images/post.jpg')}}">
+		                                        @endif
+			                                    @else 
+			                                    <img class="img-fluid" src="{{ asset('/images/post.jpg')}}">
+		                                    @endif
 										  	<div class="card-body">
 										    	<h5 title="{{ $post->title }}" class="card-title">{{ Str::limit($post->title, 20) }}</h5>
 										    	<p class="card-text">{{ Str::limit($post->content,50) }}</p>

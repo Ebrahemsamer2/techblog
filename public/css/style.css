@@ -652,3 +652,27 @@ footer .flex-center {
 	margin-top: 20px;
 	margin-left: 5px;
 }
+
+/* Edit Profile */
+
+.edit-profile {
+	margin-top: 50px;
+}
+.edit-profile h1 {
+	color: #bfbfbf;
+}
+.edit-profile .row {
+	margin-top: 50px;
+}
+.user-info-form form input {
+	margin-bottom: 10px;
+}
+.user-info-form .btn-default {
+	color: #bfbfbf;
+	border-color: #791313;
+	background: #791313;
+	margin-top: 10px;
+}
+.user-info-form .btn-default:hover {
+	color: #fff;
+}

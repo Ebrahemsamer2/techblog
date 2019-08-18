@@ -16,7 +16,11 @@ Route::post('/contact', 'ContactController@mail')->middleware('auth');
 Route::get('/user/{name}', 'HomeController@author_posts')->middleware('auth');
 
 // Profile route
-Route::get('/user/{name}/profile', 'HomeController@user_profile')->middleware('auth');
+Route::get('/user/{id}/profile', 'UserController@user_profile')->middleware('auth');
+// profile edit route
+Route::get('/user/{id}/profile/edit', 'UserController@edit_profile')->middleware('auth');
+
+Route::patch('/user/{id}/profile/edit', 'UserController@update_profile')->middleware('auth');
 
 // Post Routes
 Route::get('/create_article', 'PostController@create_article')->middleware('auth');

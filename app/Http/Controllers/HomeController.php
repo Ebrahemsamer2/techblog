@@ -65,19 +65,4 @@ class HomeController extends Controller
         
         return view('author_posts', compact('posts', 'hottest_posts', 'hottest_categories'));
     }
-
-
-    public function user_profile($name) {
-        $logged_user = Auth::user();
-        $user = User::where('name', '=' , $name)->get()->first();
-        if($user){
-            if($user->email === $logged_user->email) {  
-                return view('profile', compact('user'));
-            }else {
-                return abort(404);
-            }
-        }else {
-            return abort(404);
-        }
-    }
 }
