@@ -58,4 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->admin == 1;
     }
 
+    public function isVerified() {
+        return $this->email_verified_at !== null;
+    }
 }
