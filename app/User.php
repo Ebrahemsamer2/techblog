@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -24,7 +24,6 @@ class User extends Authenticatable
         'email',
         'password',
         'admin',
-        'verification_token',
         'photo_id',
     ];
 
@@ -35,10 +34,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public static function generateVerificationToken() {
-        return Str::random(40);
-    }
 
     public function photo() {
         return $this->belongsTo('App\Photo');

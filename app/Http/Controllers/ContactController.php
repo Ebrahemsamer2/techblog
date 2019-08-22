@@ -14,7 +14,8 @@ class ContactController extends Controller
     }
 
     public function mail(Request $request) {
-    	$data = [
+
+        $data = [
     		'name' => $request->name,
     		'msg' =>  $request->message,
     	];

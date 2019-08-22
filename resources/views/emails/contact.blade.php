@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Contact Form</title>
-</head>
-<body>
-	<h5>Hello, User <strong>{{ $name }}</strong> has a message for you</h5>
-	<p class="lead">{{ $msg }}</p>
-</body>
-</html>
+<h1>Hello Admin, </h1>
+
+<h4>{{ $name }} has a message for you </h4> <br> 
+
+<h5>{{ $msg }}. </h5>
+
+Thanks,<br>
+{{ config('app.name') }}
