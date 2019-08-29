@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
             // $model_name = explode("\\", $model)[1];
             $model_name = strtolower(class_basename($model));
 
-            return response()->json('error' => "Model $model_name Does not Exist",'code' => 404], 404);
+            return response()->json(['error' => "Model $model_name Does not Exist",'code' => 404], 404);
         }
 
         if($exception instanceof AuthenticationException) {
@@ -56,15 +56,15 @@ class Handler extends ExceptionHandler
         }
 
         if($exception instanceof AuthorizationException) {
-            return response()->json('error' => $exception->getMessages(),'code' => 403], 403);
+            return response()->json(['error' => $exception->getMessages(),'code' => 403], 403);
         }
 
         if($exception instanceof NotFoundHttpException) {
-            return response()->json('error' => 'The specified URL Does not Exist','code' => 404], 404);
+            return response()->json(['error' => 'The specified URL Does not Exist','code' => 404], 404);
         }
 
         if($exception instanceof MethodNotAllowedHttpException) {
-            return response()->json('error' => 'The specified Method is not Allowed','code' => 405], 405);
+            return response()->json(['error' => 'The specified Method is not Allowed','code' => 405], 405);
         }
 
         // Exception happen while Deleting related Foriegn keys Table that related to anothers
@@ -82,17 +82,19 @@ class Handler extends ExceptionHandler
             return parent::render($request, $exception);
         }
         // if Production release this Error
-        return $this->errorResponse("Unexpected Exception Try Again Later", 500);
+
+        return response()->json(['error' => 'Unexpected Exception Try Again Later', 'code' => 500] , 500);
     }
 
 
     protected function convertValidationExceptionToResponse(ValidationException $e, $request) {
-
         $error = $e->validator->errors()->getMessages();
-        return $this->errorResponse($error, 422);
+        // return response()->json(['error' => $error, 'code' => 422] , 422);
+        return redirect('/');
     }
 
     protected function unauthenticated($request, AuthenticationException $exception) {
-        return $this->errorResponse("UnAuthinticated", 401);
+        // return response()->json(['error' => 'UnAuthinticated', 'code' => 401] , 401);
+        return redirect('/login');
     }
 }
