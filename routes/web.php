@@ -1,5 +1,10 @@
 <?php
 
+// FaceBook & GitHub Authintication
+
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+
 // Front Users Routes
 
 Route::get('/', 'HomeController@index');
@@ -74,8 +79,6 @@ Route::namespace('Admin')->group( function() {
 
 
 Auth::routes();
-
-Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 use App\Comment;
 use App\Reply;
@@ -12,8 +13,7 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
-        $user_id = 1;
-        // $user_id = Auth::user()->id;
+        $user_id = Auth::user()->id;
 
         $rules = [];
         if($request->has('the_comment')) {

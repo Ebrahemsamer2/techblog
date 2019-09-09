@@ -43,10 +43,11 @@ $(document).ready(function(){
 
 	// Reply Validation
 
-	$(".comment-info form").submit(function() {
-		let reply = $(".comment-info form textarea[name='the_reply']").val();
+	$(".comment .comment-info form").submit(function() {
+		let reply = $(this).find("textarea[name='the_reply']").val();
 
 		if(reply.length <= 5) {
+			console.log(reply.length);
 			$(".comment-info form textarea[name='the_reply'] + p").text("Reply must be more than 5 Character.");
 			return false;
 		}else {
@@ -66,7 +67,7 @@ $(document).ready(function(){
 	// Comment Validation
 
 	$(".add-comment form").submit(function() {
-		let comment = $(".add-comment form textarea[name='the_comment']").val();
+		let comment = $(this).find("textarea[name='the_comment']").val();
 
 		if(comment.length <= 5) {
 			$(".add-comment form textarea[name='the_comment'] + p").text("Comment must be more than 5 Character.");

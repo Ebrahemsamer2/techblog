@@ -92,9 +92,12 @@
                                 <div class="comment">
                                     <div class="row">
                                         <div class="col-sm-2">
-                                            @if(file_exists(public_path('/images/') . $comment->user->photo->filename))
+
+                                            @if(isset($comment->user->photo_id))
+
                                             <img src="{{ asset('/images/'.$comment->user->photo->filename) }}" width="80" height="80" class="rounded">
                                             @else
+
                                             <img src="{{ asset('/images/user.jpg') }}" width="80" height="80" class="rounded">
                                             @endif
                                         </div>
@@ -102,11 +105,7 @@
                                             <h6>{{ $comment->user->name }} <span>{{ $comment->created_at->diffForHumans() }}</span></h6>
                                             <p class="lead">{{ $comment->the_comment }}</p>
                                             @auth
-                                            @if(Auth::user()->isVerified())
                                                 <span class="reply-btn">Reply</span>
-                                            @else
-                                                <h6>Sorry, You must verify your account before Replying</h6>
-                                            @endif
                                             @endauth
                                             @guest
                                             <h6>Sorry, You must login to add Reply <a href="/login">Login</a></h6>
@@ -133,7 +132,7 @@
                                                 <div class="reply">
                                                     <div class="row">
                                                         <div class="col-sm-2">
-                                                            @if(file_exists(public_path('/images/') . $reply->user->photo->filename))
+                                                            @if(isset($reply->user->photo_id))
                                                             <img src="{{ asset('/images/'.$reply->user->photo->filename) }}" width="80" height="80" class="rounded">
                                                             @else
                                                             <img src="{{ asset('/images/user.jpg') }}" width="80" height="80" class="rounded">
@@ -160,7 +159,6 @@
                             <div class="add-comment">
                                 <h5>Add Comment</h5>
                                 @auth
-                                @if(Auth::user()->isVerified())
                                     {!! Form::open(['method' => 'POST', 'action' => 'CommentController@store']) !!}
                                         <div class="form-group">
                                             {!! Form::hidden('post_id',$post->id) !!}
@@ -170,9 +168,6 @@
                                         </div>
                                         {!! Form::submit('Comment', ['class' => 'btn btn-default']) !!}
                                     {!! Form::close() !!}
-                                @else
-                                    <h6>Sorry, You must verify your account before adding Comments</h6>    
-                                @endif
                                 @endauth
                                 @guest
                                     <h6>Sorry, You must login to add Comment <a href="/login">Login</a></h6>
