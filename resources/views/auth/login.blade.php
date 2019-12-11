@@ -10,6 +10,11 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+                        <div class="text-center" style="margin-left: 100px;margin-bottom: 20px;">
+                            <p >Login with</p>
+                            <a class="btn btn-secondary" href="/login/github"><i style="font-size: 16px;" class="fa fa-github" aria-hidden="true"></i> Github</a>
+                            <a class="btn btn-secondary ml-2" href="/login/facebook"><i style="font-size: 16px;" class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a>
+                        </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>

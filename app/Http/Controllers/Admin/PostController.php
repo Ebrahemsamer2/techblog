@@ -13,6 +13,8 @@ use App\Category;
 use App\Post;
 use App\Photo;
 
+use Purifier;
+
 class PostController extends Controller
 {
 
@@ -33,8 +35,7 @@ class PostController extends Controller
 
         $rules = [
             'title'     =>'required|min:10|max:100',
-            'content'   =>'required|min:10|max:1000',
-            // 'user_id'   =>'required|integer',
+            'content'   =>'required|min:10|max:10000',
             'category_id'=>'required|integer',
         ];
 
@@ -43,7 +44,7 @@ class PostController extends Controller
         $data = $request->all();
         
         $user_id = Auth::user()->id;
-
+        $data['content'] = Purifier::clean($request->content);
         if($request->has('photo_id')) {
 
             $file = $request->file('photo_id');  
@@ -74,7 +75,7 @@ class PostController extends Controller
         
         $rules = [
             'title' => 'required|min:10',
-            'content' => 'required|max:1000',
+            'content' => 'required|max:10000',
             'category_id' => 'required|integer',
         ];
 
@@ -84,7 +85,7 @@ class PostController extends Controller
             $post->title = $request->title;
         }
         if($request->has('content')) {
-            $post->content = $request->content;
+            $post->content = Purifier::clean($request->content);
         }
         if($request->has('category_id')) {
             $post->category_id = $request->category_id;

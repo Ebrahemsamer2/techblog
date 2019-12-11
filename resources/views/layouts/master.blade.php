@@ -20,6 +20,7 @@
 
 	<title>@yield('title')</title>
 
+	@yield('js')
 </head>
 <body>
 	

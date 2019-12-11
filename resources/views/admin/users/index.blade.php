@@ -38,8 +38,12 @@
 					<tr>
 						<th scope="row">{{ $user->id }}</th>
 						<td>
-							@if( file_exists(public_path('/images/') . $user->photo->filename))
+							@if($user->photo)
+							@if( file_exists('images/'. $user->photo->filename))
 								<img class="img-fluid rounded" alt="User Image" width="150" height="100" src="{{ asset('/images/' . $user->photo->filename)}}"/>
+							@else
+								<img class="img-fluid rounded" alt="User Image" width="150" height="100" src="{{ asset('/images/user.jpg') }}"/>
+							@endif
 							@else
 								<img class="img-fluid rounded" alt="User Image" width="150" height="100" src="{{ asset('/images/user.jpg') }}"/>
 							@endif

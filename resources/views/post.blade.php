@@ -11,8 +11,8 @@
                         <div class="post one-post" id="post">
                             <div class="post-image">
                                 <a href="/post/{{ $post->slug }}">
-                                    @if($post->photo_id)
-                                        @if(file_exists(public_path('/images/') . $post->photo->filename))
+                                    @if($post->photo)
+                                        @if(file_exists('images/' . $post->photo->filename))
                                             <img src="{{ asset('/images/' . $post->photo->filename) }}" class="img-fluid" alt="Card image cap">
                                         @else
                                             <img class="img-fluid" src="{{ asset('/images/post.jpg')}}">
@@ -40,7 +40,7 @@
                                 </p>
                             </div>
                             <div class="post-content">
-                                <p class="lead">{{ $post->content }}</p>
+                                <p class="lead">{!! $post->content !!}</p>
                             </div>
                             <div class="post-category">
                                 <p class="lead">Category: <a href="/category/{{ $post->category->name }}">{{ $post->category->name }}</a> </p>
@@ -54,8 +54,12 @@
                         <div class="author-intro">
                             <div class="row">
                                 <div class="col-sm-2">
-                                    @if(file_exists(public_path('/images/') . $post->user->photo->filename))
+                                    @if($post->user && $post->user->photo)
+                                    @if(file_exists('images/' . $post->user->photo->filename))
                                     <img src="{{ asset('/images/'.$post->user->photo->filename) }}" width="100" height="100" class="rounded-circle">
+                                    @else
+                                    <img src="{{ asset('/images/user.jpg') }}" width="100" height="100" class="rounded-circle">
+                                    @endif
                                     @else
                                     <img src="{{ asset('/images/user.jpg') }}" width="100" height="100" class="rounded-circle">
                                     @endif
@@ -93,7 +97,7 @@
                                     <div class="row">
                                         <div class="col-sm-2">
 
-                                            @if(isset($comment->user->photo_id))
+                                            @if(isset($comment->user->photo))
 
                                             <img src="{{ asset('/images/'.$comment->user->photo->filename) }}" width="80" height="80" class="rounded">
                                             @else
@@ -132,7 +136,7 @@
                                                 <div class="reply">
                                                     <div class="row">
                                                         <div class="col-sm-2">
-                                                            @if(isset($reply->user->photo_id))
+                                                            @if(isset($reply->user->photo))
                                                             <img src="{{ asset('/images/'.$reply->user->photo->filename) }}" width="80" height="80" class="rounded">
                                                             @else
                                                             <img src="{{ asset('/images/user.jpg') }}" width="80" height="80" class="rounded">

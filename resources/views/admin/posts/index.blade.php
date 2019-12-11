@@ -44,7 +44,7 @@
 						</td>
 						<td>{{ $post->user->name }}</td>
 						<td>{{ $post->title }}</td>
-						<td>  {{ $post->admin_content }}  </td>
+						<td>{{ strip_tags($post->admin_content) }}  </td>
 						<td>{{ $post->category ? $post->category->name : "Uncategorized" }}</td>
 						<td>{{ $post->created_at->diffForHumans() }}</td>
 						<td>{{ $post->updated_at->diffForHumans() }}</td>

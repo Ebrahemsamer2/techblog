@@ -47,8 +47,8 @@
 								<div class="col-sm-4">
 									<div class="post">
 										<div class="card" style="width: 18rem;">
-											@if($post->photo_id)
-		                                        @if(file_exists(public_path('/images/') . $post->photo->filename))
+											@if($post->photo)
+		                                        @if(file_exists('images/' . $post->photo->filename))
 		                                        <img src="{{ asset('/images/'. $post->photo->filename) }}" class="img-fluid" alt="Card image cap">
 		                                        @else
 		                                        <img class="img-fluid" src="{{ asset('/images/post.jpg')}}">
@@ -58,7 +58,7 @@
 		                                    @endif
 										  	<div class="card-body">
 										    	<h5 title="{{ $post->title }}" class="card-title">{{ Str::limit($post->title, 20) }}</h5>
-										    	<p class="card-text">{{ Str::limit($post->content,50) }}</p>
+										    	<p class="card-text">{!! Str::limit($post->content,100) !!}</p>
 										    	<a href="/post/{{ $post->slug }}#post" class="btn btn-primary">Read More</a>
 										  	</div>
 										</div>

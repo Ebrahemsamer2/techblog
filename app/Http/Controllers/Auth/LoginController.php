@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Socialite;
-
+use App\User;
+use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     
@@ -19,20 +20,32 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    // for github
-    public function redirectToProvider($provider)
+	public function redirectToProvider($service)
     {
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver($service)->redirect();
     }
 
-    public function handleProviderCallback($provider)
-    {
-        $user = Socialite::driver($provider)->user();
+    public function handleProviderCallback($service)
+    {   
+        $user = Socialite::driver($service)->user();
+        
+        $findUser = User::where('email', $user->getEmail())->first();
+        if($findUser) {
+            Auth::login($findUser);
+        }else {
 
-        dd($user);
+            $newUser = new User;
+            $newUser->name = $user->getName();
+            $newUser->email = $user->getEmail();
+            $newUser->password = bcrypt(12345678);
+            
+            if($newUser->save()) {
+                Auth::login($newUser);
+                return redirect('/');
+            } else {
+                return abort(404);
+            }
+        }
+        return redirect('/');
     }
-
-
-
-
 }

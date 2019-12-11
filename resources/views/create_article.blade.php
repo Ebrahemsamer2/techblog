@@ -11,7 +11,22 @@
 	<!-- Font Awesome CDN -->
 	<script src="https://use.fontawesome.com/9da1677a46.js"></script>
 
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#postcontent',
+            height: 500,
+            plugins: 'link',
+        });
+    </script>
+
 	<style>
+
+		.tox-tinymce html {
+			background-color: #101010 !important;
+			color: #fff !important;
+		}
+
 	/* Colors : #3b8a13 => green,#791313 => red, #bfbfbf => white */
 		body {
 			background: #101010;
@@ -152,7 +167,7 @@ footer .flex-center {
 					<p class="article-error"></p>
 				</div>
 				<div class="form-group">
-					{!! Form::textarea('content', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Post Content ']) !!}
+					{!! Form::textarea('content', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Post Content', 'id' => 'postcontent']) !!}
 					<p class="article-error"></p>
 				</div>
 				<div class="form-group">

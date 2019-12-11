@@ -42,7 +42,7 @@
                                 </p>
                             </div>
                             <div class="post-content">
-                                <p class="lead">{{ Str::limit($post->content,200) }}</p>
+                                <p class="lead">{!! Str::limit($post->content,200) !!}</p>
                                 <a href="/post/{{ $post->slug }}" class="btn btn-default">Read More</a>
                             </div>
                         </div>

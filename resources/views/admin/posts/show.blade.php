@@ -20,7 +20,7 @@
 				</div>
 			<h3>{{ $post->title }}</h3>
 			<div class="post">
-				<p>{{ $post->content }}</p>
+				<p>{!! $post->content !!}</p>
 			</div>
 			<div class="admin-actions links">
 				<a href="/admin/posts/{{$post->id}}/edit" class="btn btn-info btn-sm">Edit Post</a>

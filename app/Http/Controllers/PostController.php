@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Session;
 use App\Photo;
 use App\Post;
 
+use Purifier;
+
 class PostController extends Controller
 {
     public function create_article() {
@@ -26,7 +28,7 @@ class PostController extends Controller
         $this->validate($request, $rules);
 
         $data = $request->all();
-        
+        $data['content'] =  Purifier::clean($request->content);
         $user_id = Auth::user()->id;
 
         if($request->has('photo_id')) {

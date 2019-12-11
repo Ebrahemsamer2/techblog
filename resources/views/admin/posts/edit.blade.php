@@ -3,6 +3,16 @@
 
 @section('title', 'Admin | Edit Post')
 
+@section('js')
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#postcontent',
+            height: 500,
+            plugins: 'link',
+        });
+    </script>
+@endsection
 
 @section('content')
 	<div class="container-fluid">
@@ -26,7 +36,7 @@
 			</div>
 			<div class="form-group">
 				{!! Form::label('content', 'Content') !!}
-				{!! Form::textarea('content',null, ['class'=>'form-control']) !!}
+				{!! Form::textarea('content',null, ['class'=>'form-control', 'id' => 'postcontent']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('category_id', 'Category') !!}
